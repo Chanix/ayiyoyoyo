@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "ayiyoyoyo"
-  text: "ayiyoyoyo"
+  text: "ayiyoyoyo test build"
   tagline: My great project tagline
   actions:
     - theme: brand
