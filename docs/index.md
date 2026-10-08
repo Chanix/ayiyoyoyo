@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "ayiyoyoyo"
-  text: "ayiyoyoyo test build"
+  name: "ayiyoyoyo pages dev"
+  text: "ayiyoyoyo pages dev"
   tagline: My great project tagline
   actions:
     - theme: brand
