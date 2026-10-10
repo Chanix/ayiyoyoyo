@@ -21,9 +21,7 @@ layout: doc
 
 | 返回值 | 说明 |
 |:---|:---|
-| object | 操作结果，包含： |
-|  | ok (bool): 是否成功发起打开动作 |
-|  | msg (str): 结果描述 |
+| boolean | 成功发起打开动作返回 true，其他返回 false |
 
 ```javascript
 await __A.shell.open('C:/myapp');              // 打开目录
