@@ -1,16 +1,12 @@
 <script setup>
-// Redirect to the appropriate locale
-</script>
+import { onMounted } from 'vue'
+import { useRouter } from 'vitepress'
 
-<script>
-(function () {
+onMounted(() => {
+  const router = useRouter()
   const lang = (navigator.language || 'en').toLowerCase();
   const short = lang.split('-')[0];
-
-  const target =
-    short === 'zh' ? '/zh/' :
-    '/en/';
-
-  window.location.replace(target);
-})();
+  const target = short === 'zh' ? '/zh/' : '/en/';
+  router.go(target);
+});
 </script>
