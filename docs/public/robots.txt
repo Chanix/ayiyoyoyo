@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /static/js/buildtime.data.ts.timestamp-*
+
+Sitemap: https://ayiyoyoyo.pages.dev/sitemap.xml

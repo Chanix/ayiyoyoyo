@@ -1,25 +1,16 @@
----
-# https://vitepress.dev/reference/default-theme-home-page
-layout: home
+<script setup>
+// Redirect to the appropriate locale
+</script>
 
-hero:
-  name: "ayiyoyoyo pages dev"
-  text: "ayiyoyoyo pages dev"
-  tagline: My great project tagline
-  actions:
-    - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+<script>
+(function () {
+  const lang = (navigator.language || 'en').toLowerCase();
+  const short = lang.split('-')[0];
 
-features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
----
+  const target =
+    short === 'zh' ? '/zh/' :
+    '/en/';
 
+  window.location.replace(target);
+})();
+</script>
