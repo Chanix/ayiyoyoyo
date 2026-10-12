@@ -1,4 +1,5 @@
 import {defineConfig} from 'vitepress'
+// import { withMermaid } from 'vitepress-plugin-mermaid'
 
 const SITE_URL = 'https://ayiyoyoyo.pages.dev'
 
@@ -288,17 +289,18 @@ export default defineConfig({
                         text: '新手上路',
                         collapsed: false,
                         items: [
-                            {text: '简介', link: '/zh/what-is-ayiyoyoyo'},
-                            {text: '快速开始', link: '/zh/getting-started'},
+                            {text: 'ayiyoyoyo 简介', link: '/zh/what-is-ayiyoyoyo'},
                             {text: '命令行参数', link: '/zh/cli-args'},
                             {text: '文件与目录结构', link: '/zh/dirs-and-files'},
+                            {text: '架构概览', link: '/zh/aaa'},
+                            {text: '快速开始', link: '/zh/getting-started'},
                         ],
                     },
                     {
                         text: '小应用开发',
                         collapsed: false,
                         items: [
-                            {text: '什么是小应用', link: '/zh/appchip/what-is-appchip'},
+                            {text: '小应用简介', link: '/zh/appchip/what-is-appchip'},
                             {text: '开发流程', link: '/zh/appchip/workflow'},
                             {text: '调试方法', link: '/zh/appchip/debugging'},
                             {text: '打包与分发', link: '/zh/appchip/packaging'},
@@ -330,13 +332,16 @@ export default defineConfig({
                         collapsed: false,
                         items: [
                             {text: '扩展对象概述', link: '/zh/jsapi'},
-                            {text: 'appchip（小应用管理）', link: '/zh/jsapi/JsapiAppchip'},
-                            {text: 'clipboard（剪贴板）', link: '/zh/jsapi/JsapiClipboard'},
-                            {text: 'dialog（对话框）', link: '/zh/jsapi/JsapiDialog'},
-                            {text: 'env（环境变量）', link: '/zh/jsapi/JsapiEnv'},
-                            {text: 'process（进程管理）', link: '/zh/jsapi/JsapiProcess'},
-                            {text: 'python（Python 执行）', link: '/zh/jsapi/JsapiPython'},
-                            {text: 'shell（Shell 交互）', link: '/zh/jsapi/JsapiShell'},
+                            {text: 'appchip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小应用管理', link: '/zh/jsapi/JsapiAppchip'},
+                            {text: 'clipboard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;剪贴板', link: '/zh/jsapi/JsapiClipboard'},
+                            {text: 'dialog&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对话框', link: '/zh/jsapi/JsapiDialog'},
+                            {text: 'env&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;环境变量', link: '/zh/jsapi/JsapiEnv'},
+                            {text: 'mainwin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主窗口', link: '/zh/jsapi/JsapiEnv'},
+                            {text: 'process&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;进程管理', link: '/zh/jsapi/JsapiProcess'},
+                            {text: 'python&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 执行', link: '/zh/jsapi/JsapiPython'},
+                            {text: 'runtime&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;运行时环境', link: '/zh/jsapi/JsapiRuntime'},
+                            {text: 'shell&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shell 交互', link: '/zh/jsapi/JsapiShell'},
+                            {text: 'sqlite3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sqlite3 数据库', link: '/zh/jsapi/JsapiShell'},
                         ],
                     },
                 ],
@@ -392,4 +397,4 @@ export default defineConfig({
             alt: 'ayiyoyoyo',
         },
     },
-})
+});

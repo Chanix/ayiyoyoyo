@@ -23,7 +23,7 @@ hero:
 
 features:
   - title: "🌐 前端技术栈"
-    details: 用 HTML / CSS / JavaScript 开发桌面应用，复用现有网页资源，零学习成本。
+    details: 用 HTML / CSS / JavaScript 开发桌面应用，复用现有技术资源，零学习成本。
   - title: "🐍 JS 直通 Python"
     details: 内置 Python 环境，前端直接调用脚本，无缝接入 PyPI 生态，能力不设界。
   - title: "🛠 丰富的扩展能力"
@@ -31,7 +31,7 @@ features:
   - title: "🌳 绿色分发"
     details: 免安装，解压即用。分发基座和小应用包即可，也可进一步打包成独立应用。
   - title: "👜 数据集中"
-    details: 所有数据在应用目录下，备份、迁移只需复制文件夹，不往系统深处写。
+    details: 所有数据在应用目录下，备份、迁移只需复制文件夹，不写注册表不扔垃圾数据。
   - title: "💻 跨平台支持"
-    details: 原生支持 Windows / Linux / macOS，一套代码，三端运行。
+    details: 原生支持 Windows / Linux / macOS，一套代码，多端运行。
 ---

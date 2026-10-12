@@ -8,6 +8,10 @@ layout: doc
 
 管理 ayiyoyoyo 的小应用，提供运行、安装、卸载等操作。
 
+::: warning 警告
+本模块仅供 ayiyoyoyo 专用，普通小应用如非必要请不要使用本模块。
+:::
+
 ## exist(appchip_id) <Badge type="tip" text="Since 25.5.1.1" /> {#exist}
 
 判断指定小应用是否已安装。

@@ -146,9 +146,3 @@ https://github.com/Chanix/ayiyoyoyo-devkit/releases/latest/download/ayiyoyoyo-de
 
 更进一步，可以将已编译的程序通过 NSIS 等工具生成软件安装包。
 
-## 下一步
-
-- [ayiyoyoyo 是什么？](/zh/what-is-ayiyoyoyo) —— 理解基座 + 小应用模型
-- [开发流程](/zh/appchip/workflow) —— 完整的开发到分发链路
-- [示例](/zh/examples/) —— 更多可运行的小应用
-- 

@@ -4,13 +4,16 @@ layout: doc
 
 # JS 扩展对象概述
 
-ayiyoyoyo 内置了扩展对象供 JavaScript 调用。因此，应用可以获得在浏览器中运行时无法获得的功能（例如读写本地文件，本地消息提醒）。
+ayiyoyoyo 内置了扩展对象供 JavaScript 调用。因此小应用可以获得在浏览器中运行时无法获得的功能（例如读写本地文件，本地消息提醒）。
 
 ayiyoyoyo 中所有的 JSAPI 皆考虑到跨平台，最大可能的保证在主流操作系统下行为一致。但由于操作系统的差异，某些功能存在差异或仅被限定的操作系统支持。
 
-注意：所有 JSAPI 调用皆为异步调用模式，返回值皆为 Promise。
-请使用异步编程（例如：callback, then, await, async...），
+::: info 注意
+大部分 JSAPI 调用为异步调用模式，返回值为 Promise。部分支持同步调用的会在文档中特别标注。
+
+关于异步编程（例如：callback, then, await, async...），
 具体请参阅 [JavaScript 相关文档](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript) 。
+:::
 
 ## JS 调用与返回
 

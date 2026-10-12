@@ -2,102 +2,111 @@
 layout: doc
 ---
 
-# 开发流程 {#workflow}
+# 什么是小应用 {#what-is-appchip}
 
-本篇介绍小应用从创建到分发的完整开发流程。
+小应用（Appchip）是 ayiyoyoyo 上的运行单元，每个小应用是一个独立的应用。
 
-## 总览
+## 小应用的构成
+
+一个小应用就是一个目录，包含以下文件：
 
 ```
-创建 → 编写 → 调试 → 打包 → 分发
+<appchip-id>/
+├─ appchip.json     小应用配置
+├─ appchip.ico      图标（可选）
+├─ js/              事件处理脚本
+└─ webroot/         网站根目录（本地网站时使用）
 ```
 
-## 1. 创建小应用
+### appchip.json
 
-推荐使用 **DevKit** 创建。DevKit 是开发者工具套件，会自动生成：
+小应用的配置文件，定义小应用的元信息和窗口行为。
 
-- 唯一的小应用标识（appchip id）
-- `appchip.json` 配置文件
-- 基本的目录结构
-- 空的事件处理文件
-
-打开 DevKit，选择「包装远程网站」或「包装本地网站」，按提示填写信息即可。
-
-详见[快速开始](/zh/getting-started)。
-
-## 2. 编写代码
-
-小应用的内容都放在 `webroot/` 目录下。你可以：
-
-- 写原生 HTML / CSS / JavaScript
-- 用 Vue / React 等框架，构建后把产物放进 `webroot/`
-- 直接包装已有的网站
-
-入口由 `appchip.json` 的 `url` 字段决定。支持四种运行模式，详见[什么是小应用](/zh/appchip/what-is-appchip#运行模式)。
-
-## 3. 调用扩展
-
-在页面 JS 里，通过 `__A` 调用基座提供的扩展能力：
-
-```javascript
-// 调用 Python
-const r = await __A.python.exec('__result__ = 1 + 1');
-console.log(r.result);
-
-// 读写剪贴板
-const text = await __A.clipboard.get();
-await __A.clipboard.set('Hello');
+```json
+{
+  "id": "a3f17f3a9c2e8b1d4f6a9c2e5a8b7f3a9c2e",
+  "name": "我的应用",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "url": "index.html",
+  "win_title": "我的应用",
+  "win_width": 1024,
+  "win_height": 768,
+  "win_hidden": false,
+  "win_confirm_close": false,
+  "win_on_top": false,
+  "win_resizable": true,
+  "win_fullscreen": false
+}
 ```
 
-所有扩展方法都是异步的，需要 `await`。
+字段说明：
 
-详见 [JS 扩展与 API](/zh/jsapi)
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `id` | string | 小应用唯一标识，36 字符 |
+| `name` | string | 应用名称，显示在小应用管理器 |
+| `version` | string | 版本号 |
+| `description` | string | 应用描述 |
+| `author` | string | 作者 |
+| `url` | string | 入口地址（本地路径或远程 URL） |
+| `html` | string | 内联 HTML 源码，与 `url` 互斥 |
+| `win_title` | string | 窗口标题 |
+| `win_width` | number | 窗口宽度 |
+| `win_height` | number | 窗口高度 |
+| `win_hidden` | bool | 启动时是否隐藏窗口 |
+| `win_confirm_close` | bool | 关闭时是否弹确认框 |
+| `win_on_top` | bool | 窗口是否置顶 |
+| `win_resizable` | bool | 窗口是否可调整大小 |
+| `win_fullscreen` | bool | 是否全屏启动 |
 
-## 4. 处理事件
+### js/
 
-小应用可以响应窗口事件。命名规则：`js/mainwin_on_<事件名>.js`
+存放事件处理脚本。
 
-例如，页面加载完成时执行：
+命名规则：`mainwin_on_<事件名>.js`
 
-```javascript
-// js/mainwin_on_loaded.js
-console.log('mainwin_on_loaded');
-```
+当对应事件触发时，框架会读取这个文件并通过 `exec_js` 注入页面执行。
 
-这些脚本在事件触发时由框架注入页面执行，可以访问 `window`，直接操作 DOM。
+支持的事件：
 
-支持的事件见[什么是小应用](/zh/appchip/what-is-appchip#js)。
+| 事件 | 文件名 | 触发时机 |
+|---|---|---|
+| loaded | `mainwin_on_loaded.js` | 页面加载完成 |
+| shown | `mainwin_on_shown.js` | 窗口显示 |
+| maximized | `mainwin_on_maximized.js` | 窗口最大化 |
+| minimized | `mainwin_on_minimized.js` | 窗口最小化 |
+| restored | `mainwin_on_restored.js` | 从最大化/最小化恢复 |
+| moved | `mainwin_on_moved.js` | 窗口移动 |
+| resized | `mainwin_on_resized.js` | 窗口缩放 |
 
-## 5. 调试
+事件脚本可以访问页面的 `window`，因此可以直接操作 DOM、调用 `__A` 扩展。
 
-用 **ayiyoyoyoKit.exe** 启动（不要用 `ayiyoyoyo.exe`），会进入调试模式：
+### webroot/
 
-- 自动打开浏览器开发者工具（DevTools）
-- 打开一个终端窗口，显示运行日志、错误信息
+网站根目录，存放前端资源（HTML / CSS / JS / 图片等）。
 
-调试方式和前端程序员开发 Web 应用完全一致：
+- **包装本地网站**时：`webroot/` 里是网站文件，`url` 通常是 `index.html`
+- **包装远程网站**时：没有 `webroot/`，`url` 直接是远程地址
 
-- **查看日志**：在终端窗口里看
-- **打开 DevTools**：启动时自动打开；也可以在小应用页面上右键，选「检查」
-- **刷新页面**：在页面上右键，选「刷新」
-- **重新启动小应用**：如果修改了 `appchip.json`，或者做了大面积代码改动，需要关闭窗口重新启动
+### appchip.ico
 
-## 6. 打包
+小应用图标，可选。放在 `appchip.json` 同目录下即可，无需在配置里声明。
 
-用 DevKit 的「打包小应用」功能，把 `appchips/<id>/` 打包成 zip。
 
-产物文件名固定为 `<appchip-id>.zip`。
 
-详见[打包与分发](/zh/appchip/packaging)。
+### 各模式下 `__A` 的可用性
 
-## 7. 分发
+四种运行模式下，`__A` 扩展对象的行为**完全一致**，均可调用基座提供的全部 API。
 
-将 zip 分发出去，用户通过两种方式安装：
+这意味着「增强」是普遍的——无论你的小应用是包装远程网站、本地网站，还是纯 HTML，都能获得同样的本地能力。
 
-- **从文件安装**：用户选择本地 zip
-- **从网址安装**：用户填入 zip 的 URL
+## 小应用的生命周期
 
-## 下一步
-
-- [调试方法](/zh/appchip/debugging) —— 更详细的调试技巧
-- [打包与分发](/zh/appchip/packaging) —— 分发完整流程
+1. **创建**：通过 DevKit 或手动创建目录和配置
+2. **运行**：在小应用管理器中点击卡片，或命令行 `--appchip <id>` 启动
+3. **调试**：用 ayiyoyoyoKit 打开 DevTools
+4. **打包**：通过 DevKit 打包成 zip
+5. **分发**：用户从文件或网址安装
+6. **卸载**：从小应用管理器删除，可选保留数据
