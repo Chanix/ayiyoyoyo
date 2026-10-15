@@ -12,54 +12,48 @@ layout: doc
 
 ```
 <appchip-id>/
-├─ appchip.json     小应用配置
-├─ appchip.ico      图标（可选）
-├─ js/              事件处理脚本
-└─ webroot/         网站根目录（本地网站时使用）
+    ├─ appchip.json     小应用配置
+    ├─ appchip.ico      图标（可选）
+    ├─ js/              事件处理脚本
+    └─ webroot/         网站根目录（本地使用）
 ```
 
 ### appchip.json
 
-小应用的配置文件，定义小应用的元信息和窗口行为。
+小应用的配置文件，定义小应用的元信息和配置参数。格式如下：
 
-```json
+```
 {
   "id": "a3f17f3a9c2e8b1d4f6a9c2e5a8b7f3a9c2e",
   "name": "我的应用",
-  "version": "1.0.0",
-  "description": "",
-  "author": "",
-  "url": "index.html",
-  "win_title": "我的应用",
-  "win_width": 1024,
-  "win_height": 768,
-  "win_hidden": false,
-  "win_confirm_close": false,
-  "win_on_top": false,
-  "win_resizable": true,
-  "win_fullscreen": false
+  ... ...
 }
 ```
 
 字段说明：
 
-| 字段 | 类型 | 说明 |
-|---|---|---|
-| `id` | string | 小应用唯一标识，36 字符 |
-| `name` | string | 应用名称，显示在小应用管理器 |
-| `version` | string | 版本号 |
-| `description` | string | 应用描述 |
-| `author` | string | 作者 |
-| `url` | string | 入口地址（本地路径或远程 URL） |
-| `html` | string | 内联 HTML 源码，与 `url` 互斥 |
-| `win_title` | string | 窗口标题 |
-| `win_width` | number | 窗口宽度 |
-| `win_height` | number | 窗口高度 |
-| `win_hidden` | bool | 启动时是否隐藏窗口 |
-| `win_confirm_close` | bool | 关闭时是否弹确认框 |
-| `win_on_top` | bool | 窗口是否置顶 |
-| `win_resizable` | bool | 窗口是否可调整大小 |
-| `win_fullscreen` | bool | 是否全屏启动 |
+| 字段 | 类型 | 默认值 | 说明 |
+|---|---|---|---|
+| `id` | string | | 小应用唯一标识，36 字符 |
+| `name` | string | | 小应用的名称 |
+| `version` | string | | 版本号|
+| `description` | string | | 小应用描述 |
+| `author` | string | | 作者 |
+| `url` | string | | 入口地址 |
+| `html` | string | null | 内联 HTML 源码，优先于 `url` |
+| `win_title` | string | | 窗口标题 |
+| `win_width` | number | 800 | 窗口宽度 |
+| `win_height` | number | 600 | 窗口高度 |
+| `win_hidden` | bool | false | 启动时是否隐藏窗口 |
+| `win_confirm_close` | bool | false | 关闭时是否弹确认框 |
+| `win_on_top` | bool | false | 窗口是否置顶 |
+| `win_resizable` | bool | true | 窗口是否可调整大小 |
+| `win_fullscreen` | bool | false | 是否全屏启动 |
+
+
+::: danger 注意
+小应用标识请使用工具生成，以免造成重复。以 `ayiyoyoyo` 或者 `_` 开头的为保留用途，请勿使用。
+:::
 
 ### js/
 
@@ -73,15 +67,22 @@ layout: doc
 
 | 事件 | 文件名 | 触发时机 |
 |---|---|---|
-| loaded | `mainwin_on_loaded.js` | 页面加载完成 |
-| shown | `mainwin_on_shown.js` | 窗口显示 |
-| maximized | `mainwin_on_maximized.js` | 窗口最大化 |
-| minimized | `mainwin_on_minimized.js` | 窗口最小化 |
-| restored | `mainwin_on_restored.js` | 从最大化/最小化恢复 |
-| moved | `mainwin_on_moved.js` | 窗口移动 |
-| resized | `mainwin_on_resized.js` | 窗口缩放 |
+| loaded | `mainwin_on_loaded.js` | 主窗口加载完成后 |
+| shown | `mainwin_on_shown.js` | 主窗口显示后 |
+| maximized | `mainwin_on_maximized.js` | 主窗口最大化后 |
+| minimized | `mainwin_on_minimized.js` | 主窗口最小化后 |
+| restored | `mainwin_on_restored.js` | 主窗口从最大化/最小化恢复后 |
+| moved | `mainwin_on_moved.js` | 主窗口移动后 |
+| resized | `mainwin_on_resized.js` | 主窗口缩放后 |
 
 事件脚本可以访问页面的 `window`，因此可以直接操作 DOM、调用 `__A` 扩展。
+
+
+::: tip 提示
+moved 和 resized 事件做了防抖处理。
+
+如果需要对无法控制源代码的网页进行注入，在 loaded 事件中写就可以了。
+:::
 
 ### webroot/
 
