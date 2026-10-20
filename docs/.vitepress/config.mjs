@@ -291,8 +291,7 @@ export default defineConfig({
                         items: [
                             {text: 'ayiyoyoyo 简介', link: '/zh/what-is-ayiyoyoyo'},
                             {text: '命令行参数', link: '/zh/cli-args'},
-                            {text: '文件与目录结构', link: '/zh/dirs-and-files'},
-                            {text: '架构概览', link: '/zh/aaa'},
+                            {text: '文件与目录', link: '/zh/dirs-and-files'},
                             {text: '快速开始', link: '/zh/getting-started'},
                         ],
                     },
