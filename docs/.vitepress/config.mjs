@@ -290,9 +290,9 @@ export default defineConfig({
                         collapsed: false,
                         items: [
                             {text: 'ayiyoyoyo 简介', link: '/zh/what-is-ayiyoyoyo'},
+                            {text: '快速开始', link: '/zh/getting-started'},
                             {text: '命令行参数', link: '/zh/cli-args'},
                             {text: '文件与目录', link: '/zh/dirs-and-files'},
-                            {text: '快速开始', link: '/zh/getting-started'},
                         ],
                     },
                     {
@@ -340,7 +340,7 @@ export default defineConfig({
                             {text: 'python&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 执行', link: '/zh/jsapi/JsapiPython'},
                             {text: 'runtime&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;运行时环境', link: '/zh/jsapi/JsapiRuntime'},
                             {text: 'shell&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shell 交互', link: '/zh/jsapi/JsapiShell'},
-                            {text: 'sqlite3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sqlite3 数据库', link: '/zh/jsapi/JsapiShell'},
+                            {text: 'sqlite3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sqlite3 数据库', link: '/zh/jsapi/JsapiSqlite3'},
                         ],
                     },
                 ],
