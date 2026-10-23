@@ -144,13 +144,9 @@ if (res.ok) console.log('installed:', res.id);
 else console.error(res.msg);
 ```
 
-## list(no_default) <Badge type="tip" text="Since 25.5.1.1" /> {#list}
+## list() <Badge type="tip" text="Since 25.5.1.1" /> {#list}
 
 获取所有已安装的小应用列表。
-
-| 参数 | 类型 | 说明 |
-|:---|:---|:---|
-| no_default | boolean | (可选) 是否排除默认小应用。默认为 true。 |
 
 | 返回值 | 说明 |
 |:---|:---|
@@ -207,6 +203,29 @@ if (res.ok) console.log('packed:', res.path, res.size, res.overwritten);
 ```javascript
 const pid = await __A.appchip.run('default');
 const pid2 = await __A.appchip.run('default', '--verbose --port 8080');
+```
+
+## runKit(appchip_id, params) <Badge type="tip" text="Since 26.10.19" /> {#runKit}
+
+以独立进程运行 DEBUG 版执行文件（同目录下的 xxxKit 版本）。
+
+源码模式: ayiyoyoyo.py      → ayiyoyoyoKit.py
+编译模式: ayiyoyoyo.exe     → ayiyoyoyoKit.exe
+         ayiyoyoyo (Linux)  → ayiyoyoyoKit
+
+如果当前已经是 Kit 版，则直接启动自身。
+
+| 参数 | 类型 | 说明 |
+|:---|:---|:---|
+| appchip_id | string | (可选) 小应用标识。默认为 null（即当前小应用）。 |
+| params | string | (可选) 附加命令行参数，按 shell 规则解析。默认为 ""。 |
+
+| 返回值 | 说明 |
+|:---|:---|
+| number | 新运行小应用的进程号（PID）。 |
+
+```javascript
+const pid = await __A.appchip.runKit('myapp');
 ```
 
 ## runWait(appchip_id, params) <Badge type="tip" text="Since 25.5.1.1" /> {#runWait}

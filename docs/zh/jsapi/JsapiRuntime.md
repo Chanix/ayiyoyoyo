@@ -35,19 +35,6 @@ await __A.runtime.exit();       // 正常退出
 await __A.runtime.exit(1);      // 异常退出，返回码 1
 ```
 
-## getPid() <Badge type="tip" text="Since 26.10.12" /> {#getPid}
-
-获取当前进程号。
-
-| 返回值 | 说明 |
-|:---|:---|
-| number | 当前进程号。 |
-
-```javascript
-const pid = await __A.runtime.getPid();
-console.log('当前进程号:', pid);
-```
-
 ## noop() <Badge type="tip" text="Since 26.10.12" /> {#noop}
 
 空操作。
