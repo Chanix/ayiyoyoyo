@@ -2,7 +2,7 @@
 layout: doc
 ---
 
-# ayiyoyoyo.api.process <Badge type="tip" text="Since 26.10.10" />
+# ayiyoyoyo.api.process <Badge type="tip" text="Since 25.5.1.1" />
 
 进程管理与操作。
 
@@ -17,7 +17,7 @@ layout: doc
 通过本模块可以终止任意进程，使用风险自担。
 :::
 
-## execute(bin_name, params) <Badge type="tip" text="Since 26.10.10" /> {#execute}
+## execute(bin_name, params) <Badge type="tip" text="Since 25.5.1.1" /> {#execute}
 
 运行指定可执行文件（不等待），返回进程号。
 
@@ -26,19 +26,20 @@ layout: doc
 | bin_name | string | 可执行文件路径或命令名。 |
 | params | string | (可选) 附加命令行参数，按 shell 规则解析。默认为 ""。 |
 
-| 返回值 | 说明 |
-|:---|:---|
-| object | 运行结果，包含： |
-|  | - ok (bool): 是否成功 |
-|  | - pid (int \| null): 进程号 |
-|  | - msg (str): 结果描述 |
+返回值：`object`
+
+| 字段 | 类型 | 说明 |
+|:---|:---|:---|
+| ok | boolean | 是否成功 |
+| pid | number \| null | 进程号 |
+| msg | string | 结果描述 |
 
 ```javascript
 const res = await __A.process.execute('notepad.exe');
 if (res.ok) console.log('pid:', res.pid);
 ```
 
-## executeWait(bin_name, params) <Badge type="tip" text="Since 26.10.10" /> {#executeWait}
+## executeWait(bin_name, params) <Badge type="tip" text="Since 25.5.1.1" /> {#executeWait}
 
 运行指定可执行文件并等待其结束，返回执行结果。
 
@@ -47,21 +48,22 @@ if (res.ok) console.log('pid:', res.pid);
 | bin_name | string | 可执行文件路径或命令名。 |
 | params | string | (可选) 附加命令行参数，按 shell 规则解析。默认为 ""。 |
 
-| 返回值 | 说明 |
-|:---|:---|
-| object | 执行结果，包含： |
-|  | - ok (bool): 是否成功执行（不代表退出码为 0） |
-|  | - retcode (int \| null): 进程返回码 |
-|  | - stdout (str): 标准输出 |
-|  | - stderr (str): 标准错误 |
-|  | - msg (str): 结果描述 |
+返回值：`object`
+
+| 字段 | 类型 | 说明 |
+|:---|:---|:---|
+| ok | boolean | 是否成功执行（不代表退出码为 0） |
+| retcode | number \| null | 进程返回码 |
+| stdout | string | 标准输出 |
+| stderr | string | 标准错误 |
+| msg | string | 结果描述 |
 
 ```javascript
 const res = await __A.process.executeWait('python', '--version');
 console.log(res.retcode, res.stdout, res.stderr);
 ```
 
-## exists(pid) <Badge type="tip" text="Since 26.10.10" /> {#exists}
+## exists(pid) <Badge type="tip" text="Since 25.5.1.1" /> {#exists}
 
 检查指定进程是否存在。
 
@@ -77,7 +79,7 @@ console.log(res.retcode, res.stdout, res.stderr);
 const alive = await __A.process.exists(1234);
 ```
 
-## getInformation(pid) <Badge type="tip" text="Since 26.10.10" /> {#getInformation}
+## getInformation(pid) <Badge type="tip" text="Since 25.5.1.1" /> {#getInformation}
 
 获取指定进程的详细信息。
 
@@ -85,19 +87,20 @@ const alive = await __A.process.exists(1234);
 |:---|:---|:---|
 | pid | number | 进程号。 |
 
-| 返回值 | 说明 |
-|:---|:---|
-| object | 进程信息，包含： |
-|  | - ok (bool): 是否成功 |
-|  | - info (dict \| null): 进程信息字典（psutil 的 as\_dict 结果） |
-|  | - msg (str): 结果描述 |
+返回值：`object`
+
+| 字段 | 类型 | 说明 |
+|:---|:---|:---|
+| ok | boolean | 是否成功 |
+| info | object \| null | 进程信息字典（psutil 的 as\_dict 结果） |
+| msg | string | 结果描述 |
 
 ```javascript
 const res = await __A.process.getInformation(1234);
 if (res.ok) console.log(res.info.name, res.info.cpu_percent);
 ```
 
-## kill(pid) <Badge type="tip" text="Since 26.10.10" /> {#kill}
+## kill(pid) <Badge type="tip" text="Since 25.5.1.1" /> {#kill}
 
 强制终止指定进程。
 
@@ -112,17 +115,18 @@ UNIX 下发送 SIGKILL；Windows 下使用 TerminateProcess。
 |:---|:---|:---|
 | pid | number | 进程号。 |
 
-| 返回值 | 说明 |
-|:---|:---|
-| object | 操作结果，包含： |
-|  | - ok (bool): 是否成功 |
-|  | - msg (str): 结果描述 |
+返回值：`object`
+
+| 字段 | 类型 | 说明 |
+|:---|:---|:---|
+| ok | boolean | 是否成功 |
+| msg | string | 结果描述 |
 
 ```javascript
 const res = await __A.process.kill(1234);
 ```
 
-## list() <Badge type="tip" text="Since 26.10.10" /> {#list}
+## list() <Badge type="tip" text="Since 25.5.1.1" /> {#list}
 
 获取当前所有进程的 PID 列表。
 
@@ -134,7 +138,7 @@ const res = await __A.process.kill(1234);
 const pids = await __A.process.list();
 ```
 
-## resume(pid) <Badge type="tip" text="Since 26.10.10" /> {#resume}
+## resume(pid) <Badge type="tip" text="Since 25.5.1.1" /> {#resume}
 
 恢复指定进程。
 
@@ -146,17 +150,18 @@ UNIX 下发送 SIGCONT；Windows 下恢复所有线程。
 |:---|:---|:---|
 | pid | number | 进程号。 |
 
-| 返回值 | 说明 |
-|:---|:---|
-| object | 操作结果，包含： |
-|  | - ok (bool): 是否成功 |
-|  | - msg (str): 结果描述 |
+返回值：`object`
+
+| 字段 | 类型 | 说明 |
+|:---|:---|:---|
+| ok | boolean | 是否成功 |
+| msg | string | 结果描述 |
 
 ```javascript
 const res = await __A.process.resume(1234);
 ```
 
-## sendSignal(pid, signal) <Badge type="tip" text="Since 26.10.10" /> {#sendSignal}
+## sendSignal(pid, signal) <Badge type="tip" text="Since 25.5.1.1" /> {#sendSignal}
 
 向指定进程发送信号。
 
@@ -171,17 +176,18 @@ Windows 下仅支持 SIGTERM、CTRL\_C\_EVENT、CTRL\_BREAK\_EVENT，
 | pid | number | 进程号。 |
 | signal | number | 信号值（见 signal 模块常量）。 |
 
-| 返回值 | 说明 |
-|:---|:---|
-| object | 操作结果，包含： |
-|  | - ok (bool): 是否成功 |
-|  | - msg (str): 结果描述 |
+返回值：`object`
+
+| 字段 | 类型 | 说明 |
+|:---|:---|:---|
+| ok | boolean | 是否成功 |
+| msg | string | 结果描述 |
 
 ```javascript
 const res = await __A.process.sendSignal(1234, 15);  // SIGTERM
 ```
 
-## suspend(pid) <Badge type="tip" text="Since 26.10.10" /> {#suspend}
+## suspend(pid) <Badge type="tip" text="Since 25.5.1.1" /> {#suspend}
 
 挂起指定进程。
 
@@ -193,17 +199,18 @@ UNIX 下发送 SIGSTOP；Windows 下挂起所有线程。
 |:---|:---|:---|
 | pid | number | 进程号。 |
 
-| 返回值 | 说明 |
-|:---|:---|
-| object | 操作结果，包含： |
-|  | - ok (bool): 是否成功 |
-|  | - msg (str): 结果描述 |
+返回值：`object`
+
+| 字段 | 类型 | 说明 |
+|:---|:---|:---|
+| ok | boolean | 是否成功 |
+| msg | string | 结果描述 |
 
 ```javascript
 const res = await __A.process.suspend(1234);
 ```
 
-## terminate(pid) <Badge type="tip" text="Since 26.10.10" /> {#terminate}
+## terminate(pid) <Badge type="tip" text="Since 25.5.1.1" /> {#terminate}
 
 终止指定进程。
 
@@ -215,11 +222,12 @@ UNIX 下发送 SIGTERM；Windows 下等价于 kill()。
 |:---|:---|:---|
 | pid | number | 进程号。 |
 
-| 返回值 | 说明 |
-|:---|:---|
-| object | 操作结果，包含： |
-|  | - ok (bool): 是否成功 |
-|  | - msg (str): 结果描述 |
+返回值：`object`
+
+| 字段 | 类型 | 说明 |
+|:---|:---|:---|
+| ok | boolean | 是否成功 |
+| msg | string | 结果描述 |
 
 ```javascript
 const res = await __A.process.terminate(1234);

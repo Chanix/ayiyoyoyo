@@ -2,7 +2,7 @@
 layout: doc
 ---
 
-# ayiyoyoyo.api.autostart <Badge type="tip" text="Since 26.10.10" />
+# ayiyoyoyo.api.autostart <Badge type="tip" text="Since 25.5.1.1" />
 
 开机自启动管理。
 
@@ -13,7 +13,7 @@ layout: doc
 - Linux：\~/.config/autostart/ 下的 .desktop 文件
 - macOS：\~/Library/LaunchAgents/ 下的 plist
 
-## disable(appchip_id) <Badge type="tip" text="Since 26.10.10" /> {#disable}
+## disable(appchip_id) <Badge type="tip" text="Since 25.5.1.1" /> {#disable}
 
 取消指定小应用的开机自启动。
 
@@ -30,7 +30,7 @@ await __A.autostart.disable();
 await __A.autostart.disable('myapp');
 ```
 
-## enable(appchip_id) <Badge type="tip" text="Since 26.10.10" /> {#enable}
+## enable(appchip_id) <Badge type="tip" text="Since 25.5.1.1" /> {#enable}
 
 设置指定小应用开机自启动。
 
@@ -47,7 +47,7 @@ await __A.autostart.enable();
 await __A.autostart.enable('myapp');
 ```
 
-## isEnabled(appchip_id) <Badge type="tip" text="Since 26.10.10" /> {#isEnabled}
+## isEnabled(appchip_id) <Badge type="tip" text="Since 25.5.1.1" /> {#isEnabled}
 
 查询指定小应用是否已设置开机自启动。
 

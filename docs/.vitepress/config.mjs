@@ -335,7 +335,7 @@ export default defineConfig({
                             {text: 'clipboard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;剪贴板', link: '/zh/jsapi/JsapiClipboard'},
                             {text: 'dialog&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对话框', link: '/zh/jsapi/JsapiDialog'},
                             {text: 'env&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;环境变量', link: '/zh/jsapi/JsapiEnv'},
-                            {text: 'mainwin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主窗口', link: '/zh/jsapi/JsapiEnv'},
+                            // {text: 'mainwin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主窗口', link: '/zh/jsapi/JsapiEnv'},
                             {text: 'process&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;进程管理', link: '/zh/jsapi/JsapiProcess'},
                             {text: 'python&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 执行', link: '/zh/jsapi/JsapiPython'},
                             {text: 'runtime&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;运行时环境', link: '/zh/jsapi/JsapiRuntime'},

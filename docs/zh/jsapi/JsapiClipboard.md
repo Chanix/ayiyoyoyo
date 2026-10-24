@@ -2,15 +2,12 @@
 layout: doc
 ---
 
-# ayiyoyoyo.api.clipboard <Badge type="tip" text="Since 26.9.30.1" />
+# ayiyoyoyo.api.clipboard <Badge type="tip" text="Since 25.5.1.1" />
 
-剪贴板支持（增强版）
+提供系统剪贴板读写能力，支持文本与图片。
+图片以 base64 编码的 PNG 格式传输。
 
-向前端 JS 提供系统剪贴板读写能力，支持文本与图片。
-
-图片以 base64 编码的 PNG 格式在 bridge 上传输。
-
-## clear() <Badge type="tip" text="Since 26.9.30.1" /> {#clear}
+## clear() <Badge type="tip" text="Since 25.5.1.1" /> {#clear}
 
 清空剪贴板。
 
@@ -18,7 +15,7 @@ layout: doc
 await __A.clipboard.clear();
 ```
 
-## getImage() <Badge type="tip" text="Since 26.9.30.1" /> {#getImage}
+## getImage() <Badge type="tip" text="Since 25.5.1.1" /> {#getImage}
 
 从剪贴板读取图片，返回 base64 编码的 PNG。
 
@@ -32,7 +29,7 @@ if (b64) document.querySelector('#preview').src =
     `data:image/png;base64,${b64}`;
 ```
 
-## getText() <Badge type="tip" text="Since 26.9.30.1" /> {#getText}
+## getText() <Badge type="tip" text="Since 25.5.1.1" /> {#getText}
 
 获取剪贴板中的文本。
 
@@ -44,7 +41,7 @@ if (b64) document.querySelector('#preview').src =
 text = await __A.clipboard.getText();
 ```
 
-## setImage(base64_data) <Badge type="tip" text="Since 26.9.30.1" /> {#setImage}
+## setImage(base64_data) <Badge type="tip" text="Since 25.5.1.1" /> {#setImage}
 
 将 base64 编码的图片写入剪贴板。
 
@@ -56,7 +53,7 @@ text = await __A.clipboard.getText();
 await __A.clipboard.setImage(base64String);
 ```
 
-## setText(text) <Badge type="tip" text="Since 26.9.30.1" /> {#setText}
+## setText(text) <Badge type="tip" text="Since 25.5.1.1" /> {#setText}
 
 将文本写入剪贴板。
 

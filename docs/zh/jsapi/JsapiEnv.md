@@ -24,18 +24,6 @@ const v = await __A.env.get('PATH');
 const v2 = await __A.env.get('NOT_EXIST', 'fallback');
 ```
 
-## getsep() <Badge type="tip" text="Since 25.5.1.1" /> {#getsep}
-
-获取当前平台的环境变量路径分隔符。
-
-| 返回值 | 说明 |
-|:---|:---|
-| string | ';'（Windows）或 ':'（Linux/macOS）。 |
-
-```javascript
-const sep = await __A.env.getsep();
-```
-
 ## items() <Badge type="tip" text="Since 25.5.1.1" /> {#items}
 
 获取全部环境变量（键值对）。
