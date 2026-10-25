@@ -34,14 +34,9 @@ const onTop = await __A.mainwin.getOnTop();
 
 获取窗口当前状态。
 
-返回值：`number`
-
-| 字段 | 类型 | 说明 |
-|:---|:---|:---|
-|  |  | -1 未知 |
-|  |  | 0 最小化 |
-|  |  | 1 普通 |
-|  |  | 2 最大化 |
+| 返回值 | 说明 |
+|:---|:---|
+| number | 窗口状态： -1 未知, 0 最小化, 1 普通, 2 最大化 |
 
 ```javascript
 const state = await __A.mainwin.getState();
@@ -62,11 +57,7 @@ if (state === 2) console.log('窗口已最大化');
 | height | number | 窗口高度 |
 | title | string | 窗口标题 |
 | ontop | boolean | 是否置顶 |
-| state | number | 窗口状态： |
-|  |  | -1 未知 |
-|  |  | 0 最小化 |
-|  |  | 1 普通 |
-|  |  | 2 最大化 |
+| state | number | 窗口状态：： -1 未知, 0 最小化, 1 普通, 2 最大化 |
 
 ```javascript
 const s = await __A.mainwin.getStatus();

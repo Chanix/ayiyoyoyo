@@ -4,10 +4,10 @@ layout: doc
 
 # ayiyoyoyo.api.appchip <Badge type="tip" text="Since 25.5.1.1" />
 
-管理 ayiyoyoyo 的小应用，包括运行、安装、卸载等。
+管理小应用，包括运行、安装、卸载、打包等。
 
 ::: warning 警告
-本模块仅供 ayiyoyoyo 专用，普通小应用如非必要请不要使用本模块。
+本模块仅供 ayiyoyoyo 内部小应用专用，其他小应用请不要使用本模块。
 :::
 
 ## createLocalhost(config, src_dir) <Badge type="tip" text="Since 25.5.1.1" /> {#createLocalhost}
@@ -70,6 +70,92 @@ const res = await __A.appchip.createRemote({
 if (res.ok) console.log('created:', res.id, res.path, res.icon);
 ```
 
+## exist(appchip_id) <Badge type="tip" text="Since 25.5.1.1" /> {#exist}
+
+判断指定小应用是否已安装。
+
+::: info 注意
+内置小应用（BUILTIN\_APPCHIPS）永远存在，返回 True。
+（当前 \_is\_builtin\_appchip 为占位实现，恒 False，故暂按磁盘目录判断。）
+:::
+
+| 参数 | 类型 | 说明 |
+|:---|:---|:---|
+| appchip_id | string | 小应用标识 |
+
+| 返回值 | 说明 |
+|:---|:---|
+| boolean | 小应用是否存在（内置应用或程序目录为有效目录）。 |
+
+```javascript
+await __A.appchip.exist('default');
+```
+
+## getDirAppchip(appchip_id) <Badge type="tip" text="Since 25.5.1.1" /> {#getDirAppchip}
+
+获取指定小应用的程序目录。
+
+::: info 注意
+仅按规范拼接路径，不检查指定小应用是否真实存在。
+内置小应用无磁盘目录，返回 None。
+（当前 \_is\_builtin\_appchip 为占位实现，恒 False，故暂不返回 None。）
+:::
+
+| 参数 | 类型 | 说明 |
+|:---|:---|:---|
+| appchip_id | string | (可选) 小应用标识。默认为 null（即当前小应用）。 |
+
+| 返回值 | 说明 |
+|:---|:---|
+| string \| null | 小应用程序目录的绝对路径；内置小应用返回 null。 |
+
+```javascript
+const dir = await __A.appchip.getDirAppchip('default');
+const currentDir = await __A.appchip.getDirAppchip(); // 默认为当前小应用
+```
+
+## getDirData(appchip_id) <Badge type="tip" text="Since 25.5.1.1" /> {#getDirData}
+
+获取指定小应用的数据目录。
+
+::: info 注意
+仅按规范拼接路径，不检查指定小应用是否真实存在。
+:::
+
+| 参数 | 类型 | 说明 |
+|:---|:---|:---|
+| appchip_id | string | (可选) 小应用标识。默认为 null（即当前小应用）。 |
+
+| 返回值 | 说明 |
+|:---|:---|
+| string | 小应用数据目录的绝对路径。 |
+
+```javascript
+await __A.appchip.getDirData();
+await __A.appchip.getDirData('default');
+```
+
+## getDirWebview(appchip_id) <Badge type="tip" text="Since 25.5.1.1" /> {#getDirWebview}
+
+获取指定小应用的浏览器控件数据目录。
+
+::: info 注意
+仅按规范拼接路径，不检查指定小应用是否真实存在。
+:::
+
+| 参数 | 类型 | 说明 |
+|:---|:---|:---|
+| appchip_id | string | (可选) 小应用标识。默认为 null（即当前小应用）。 |
+
+| 返回值 | 说明 |
+|:---|:---|
+| string | 小应用浏览器控件数据目录的绝对路径。 |
+
+```javascript
+await __A.appchip.getDirWebview();
+await __A.appchip.getDirWebview('default');
+```
+
 ## installFromUrl(url) <Badge type="tip" text="Since 25.5.1.1" /> {#installFromUrl}
 
 从指定网址下载 zip 并安装小应用。
@@ -118,6 +204,18 @@ else console.error(res.msg);
 const res = await __A.appchip.installFromZip('C:/downloads/myapp.zip');
 if (res.ok) console.log('installed:', res.id);
 else console.error(res.msg);
+```
+
+## isKitAvailable() <Badge type="tip" text="Since 25.5.1.1" /> {#isKitAvailable}
+
+判断同目录下是否存在 DEBUG 版（Kit）执行文件。
+
+| 返回值 | 说明 |
+|:---|:---|
+| boolean | Kit 版是否可用。 |
+
+```javascript
+const ok = await __A.appchip.isKitAvailable();
 ```
 
 ## list() <Badge type="tip" text="Since 25.5.1.1" /> {#list}

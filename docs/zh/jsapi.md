@@ -4,9 +4,7 @@ layout: doc
 
 # JS 扩展对象概述
 
-ayiyoyoyo 内置了扩展对象供 JavaScript 调用。因此小应用可以获得在浏览器中运行时无法获得的功能（例如读写本地文件，本地消息提醒）。
-
-ayiyoyoyo 中所有的 JSAPI 皆考虑到跨平台，最大可能的保证在主流操作系统下行为一致。但由于操作系统的差异，某些功能存在差异或仅被限定的操作系统支持。
+系统内置了扩展对象 `ayiyoyoyo` 供 JavaScript 调用。因此小应用可以获得在浏览器中运行时无法获得的功能（例如读写本地文件，本地消息提醒）。
 
 ::: info 注意
 大部分 JSAPI 调用为异步调用模式，返回值为 Promise。部分支持同步调用的会在文档中特别标注。
@@ -17,8 +15,9 @@ ayiyoyoyo 中所有的 JSAPI 皆考虑到跨平台，最大可能的保证在主
 
 ## JS 调用与返回
 
-ayiyoyoyo 会在浏览器组件窗口装载完成之后新增对象： `window.ayiyoyoyo`，之后触发事件 `ayiyoyoyoReady`。
-该准备工作完成以后就可以在 JavaScript 中调用扩展对象功能。否则，即 `ayiyoyoyoReady` 事件触发之前，将会出现错误，可以通过侦听事件来解决这个问题。
+浏览器组件窗口装载完成之后会新增对象： `window.ayiyoyoyo`，之后触发事件 `ayiyoyoyoReady`。
+该事件触发后就可以在 JavaScript 中调用扩展对象功能。否则，即 `ayiyoyoyoReady` 事件触发之前，将会出现错误，可以通过侦听事件来解决这个问题。
+`ayiyoyoyoReady` 事件后，触发onloaded事件，调用执行小应用目录下的 js/mainwin_on_loaded.js（如果存在的话）。
 
 ```javascript
 window.addEventListener('ayiyoyoyoReady', function () {
@@ -30,7 +29,7 @@ window.addEventListener('ayiyoyoyoReady', function () {
 `window.ayiyoyoyo.api.<模块名>.<函数名>` 这样的方式来进行调用。
 所有扩展调用函数，返回值皆为 Promise，为了方便说明理解，文档中的返回值按普通方式来编写。
 
-为了简化写法，方便偷懒，定义了一些预设变量：
+为了简化写法（偷懒少打几次键盘），定义了一些预设变量：
 
 ```javascript
 __C = window.ayiyoyoyo
@@ -41,9 +40,9 @@ __T = window.ayiyoyoyo.token
 例如下面几个是等价的调用：
 
 ```javascript
-window.ayiyoyoyo.api.core.exit();
-ayiyoyoyo.api.core.exit();
-__A.core.exit();
+window.ayiyoyoyo.api.runtime.exit();
+ayiyoyoyo.api.runtime.exit();
+__A.runtime.exit();
 ```
 
 ## 增加与完善
@@ -62,6 +61,5 @@ ayiyoyoyo 以宁缺毋滥的态度来增加 JSAPI，现有扩展已满足大多�
 
 ## 系统兼容性
 
-ayiyoyoyo 以 python 作为开发语言，本身是跨平台的，但是依然需要其他包的支持。
-我们会尽量使用跨平台，一致性的python包，但是很遗憾，仍然有些功能在平台上存在差异。
-我们会尽量的保证jsapi在多个操作系统上的一致性，但是依然需要开发者注意差异并做好测试。
+所有的 JSAPI 皆最大可能的保证在主流操作系统下行为一致。但由于操作系统的差异，某些功能存在差异或仅被限定的操作系统支持。
+我们会尽量的保证jsapi在多个操作系统上的一致性，但是依然需要开发者注意差异并**做好测试**。
