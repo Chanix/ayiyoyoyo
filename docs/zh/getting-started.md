@@ -32,7 +32,7 @@ sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0 gir1.2-webkit2-4.1
 
 ## 启动并运行
 
-打开 `ayiyoyoyo/bin/` 目录，双击 ayiyoyoyo 可执行文件即可运行。
+打开 `ayiyoyoyo/` 目录，双击 ayiyoyoyo 可执行文件即可运行。
 
 运行后会打开“小应用管理器”，显示已安装的小应用。ayiyoyoyo 的下载包预装数个实用小应用。可按照实际需要进行增删。
 
