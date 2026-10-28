@@ -8,16 +8,6 @@ layout: doc
 
 提供当前应用运行时的信息与操作。
 
-### JS 属性
-
-| 属性 | 类型 | 说明 |
-|:---|:---|:---|
-| pid | number | 当前进程号 |
-
-```javascript
-__A.runtime.pid
-```
-
 ## exit(retcode) <Badge type="tip" text="Since 25.5.1.1" /> {#exit}
 
 退出当前应用。

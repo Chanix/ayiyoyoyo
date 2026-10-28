@@ -303,6 +303,7 @@ export default defineConfig({
                             {text: '开发流程', link: '/zh/appchip/workflow'},
                             {text: '调试方法', link: '/zh/appchip/debugging'},
                             {text: '打包与分发', link: '/zh/appchip/packaging'},
+                            {text: '常见问题', link: '/zh/faq'},
                         ],
                     },
                     // {
