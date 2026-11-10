@@ -25,8 +25,8 @@ layout: doc
 
 | 参数 | 类型 | 说明 |
 |:---|:---|:---|
-| title | string | (可选) 对话框标题，默认为 ''。 |
 | message | string | (可选) 对话框内容，默认为 ''。 |
+| title | string | (可选) 对话框标题，默认为 ''。 |
 
 | 返回值 | 说明 |
 |:---|:---|
@@ -93,5 +93,5 @@ await __A.dialog.openFile(null, '所有文件 (*.*) | 文档文件 (*.doc;*.md;*
 ```javascript
 await __A.dialog.saveFile();
 
-await __A.dialog.openFile(null, '所有文件 (*.*) | 文档文件 (*.doc;*.md;*.txt) | 程序源码 (*.c;*.cpp;*.py;*.java)', true);
+await __A.dialog.saveFile(null, '所有文件 (*.*) | 文档文件 (*.doc;*.md;*.txt) | 程序源码 (*.c;*.cpp;*.py;*.java)');
 ```

@@ -17,7 +17,7 @@ layout: doc
 
 | 返回值 | 说明 |
 |:---|:---|
-| string \| null | 变量值，或 default。 |
+| any | 变量值（str），或 default。 |
 
 ```javascript
 const v = await __A.env.get('PATH');
@@ -30,7 +30,7 @@ const v2 = await __A.env.get('NOT_EXIST', 'fallback');
 
 | 返回值 | 说明 |
 |:---|:---|
-| object | 环境变量的键值对字典。 |
+| dict[str, str] | 环境变量的键值对字典。 |
 
 ```javascript
 const all = await __A.env.items();
@@ -59,7 +59,7 @@ const names = await __A.env.keys();
 
 | 返回值 | 说明 |
 |:---|:---|
-| string \| null | 被删除变量的原值，或 default。 |
+| any | 被删除变量的原值（str），或 default。 |
 
 ```javascript
 const old = await __A.env.pop('MY_VAR');
@@ -69,6 +69,10 @@ const old = await __A.env.pop('MY_VAR');
 
 设置环境变量。value 为 None 时等价于删除该变量。
 
+::: info 注意
+非 None 的 value 会被 str() 转换为字符串后写入。
+:::
+
 | 参数 | 类型 | 说明 |
 |:---|:---|:---|
 | name | string | 变量名。 |
@@ -76,6 +80,7 @@ const old = await __A.env.pop('MY_VAR');
 
 ```javascript
 await __A.env.set('MY_VAR', 'hello');
+await __A.env.set('MY_VAR', 42);       // 写入 '42'
 await __A.env.set('MY_VAR');           // 删除 MY_VAR
 ```
 

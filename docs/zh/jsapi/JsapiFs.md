@@ -12,20 +12,20 @@ layout: doc
 
 获取路径的文件名部分。
 
+::: info 注意
+发生异常时返回空字符串。
+:::
+
 | 参数 | 类型 | 说明 |
 |:---|:---|:---|
 | path | string | 路径。 |
 
-返回值：`object`
-
-| 字段 | 类型 | 说明 |
-|:---|:---|:---|
-| ok | boolean | 是否成功 |
-| msg | string | 结果描述 |
-| name | string | 文件名 |
+| 返回值 | 说明 |
+|:---|:---|
+| string | 文件名，失败时为空字符串。 |
 
 ```javascript
-const res = await __A.fs.basename('C:/a/b.txt');  // res.name === 'b.txt'
+const name = await __A.fs.basename('C:/a/b.txt');  // name === 'b.txt'
 ```
 
 ## copy(src, dst, overwrite) <Badge type="tip" text="Since 25.5.1.1" /> {#copy}
@@ -60,81 +60,83 @@ await __A.fs.copy('C:/dir', 'C:/dir2', true);
 
 获取路径的父目录部分。
 
+::: info 注意
+发生异常时返回空字符串。
+:::
+
 | 参数 | 类型 | 说明 |
 |:---|:---|:---|
 | path | string | 路径。 |
 
-返回值：`object`
-
-| 字段 | 类型 | 说明 |
-|:---|:---|:---|
-| ok | boolean | 是否成功 |
-| msg | string | 结果描述 |
-| dir | string | 父目录 |
+| 返回值 | 说明 |
+|:---|:---|
+| string | 父目录，失败时为空字符串。 |
 
 ```javascript
-const res = await __A.fs.dirname('C:/a/b.txt');  // res.dir === 'C:/a'
+const dir = await __A.fs.dirname('C:/a/b.txt');  // dir === 'C:/a'
 ```
 
 ## exists(path) <Badge type="tip" text="Since 25.5.1.1" /> {#exists}
 
 判断路径是否存在。
 
+::: info 注意
+内部吞掉 OSError，权限不足、路径非法等情况也返回 False。
+:::
+
 | 参数 | 类型 | 说明 |
 |:---|:---|:---|
 | path | string | 路径。 |
 
-返回值：`object`
-
-| 字段 | 类型 | 说明 |
-|:---|:---|:---|
-| ok | boolean | 查询本身是否成功 |
-| msg | string | 结果描述 |
-| exists | boolean | 是否存在 |
+| 返回值 | 说明 |
+|:---|:---|
+| boolean | 路径是否存在。 |
 
 ```javascript
-const res = await __A.fs.exists('C:/a.txt');
-if (res.exists) console.log('存在');
+const ok = await __A.fs.exists('C:/a.txt');
+if (ok) console.log('存在');
 ```
 
 ## isDir(path) <Badge type="tip" text="Since 25.5.1.1" /> {#isDir}
 
 判断路径是否为目录。
 
+::: info 注意
+内部吞掉 OSError，权限不足、路径非法等情况也返回 False。
+:::
+
 | 参数 | 类型 | 说明 |
 |:---|:---|:---|
 | path | string | 路径。 |
 
-返回值：`object`
-
-| 字段 | 类型 | 说明 |
-|:---|:---|:---|
-| ok | boolean | 是否成功 |
-| msg | string | 结果描述 |
-| is_dir | boolean | 是否为目录 |
+| 返回值 | 说明 |
+|:---|:---|
+| boolean | 路径是否为目录。 |
 
 ```javascript
-const res = await __A.fs.isDir('C:/dir');
+const ok = await __A.fs.isDir('C:/dir');
+if (ok) console.log('是目录');
 ```
 
 ## isFile(path) <Badge type="tip" text="Since 25.5.1.1" /> {#isFile}
 
 判断路径是否为文件。
 
+::: info 注意
+内部吞掉 OSError，权限不足、路径非法等情况也返回 False。
+:::
+
 | 参数 | 类型 | 说明 |
 |:---|:---|:---|
 | path | string | 路径。 |
 
-返回值：`object`
-
-| 字段 | 类型 | 说明 |
-|:---|:---|:---|
-| ok | boolean | 是否成功 |
-| msg | string | 结果描述 |
-| is_file | boolean | 是否为文件 |
+| 返回值 | 说明 |
+|:---|:---|
+| boolean | 路径是否为文件。 |
 
 ```javascript
-const res = await __A.fs.isFile('C:/a.txt');
+const ok = await __A.fs.isFile('C:/a.txt');
+if (ok) console.log('是文件');
 ```
 
 ## join(parts) <Badge type="tip" text="Since 25.5.1.1" /> {#join}
@@ -143,19 +145,16 @@ const res = await __A.fs.isFile('C:/a.txt');
 
 ::: info 注意
 用系统分隔符拼接，自动处理多余的分隔符。
+无参数或发生异常时返回空字符串。
 :::
 
-返回值：`object`
-
-| 字段 | 类型 | 说明 |
-|:---|:---|:---|
-| ok | boolean | 是否成功 |
-| msg | string | 结果描述 |
-| path | string \| null | 拼接结果 |
+| 返回值 | 说明 |
+|:---|:---|
+| string | 拼接结果，失败时为空字符串。 |
 
 ```javascript
-const res = await __A.fs.join('C:/a', 'b', 'c.txt');
-// res.path === 'C:/a/b/c.txt'（Windows 下为 C:\a\b\c.txt）
+const p = await __A.fs.join('C:/a', 'b', 'c.txt');
+// p === 'C:/a/b/c.txt'（Windows 下为 C:\a\b\c.txt）
 ```
 
 ## listDir(path) <Badge type="tip" text="Since 25.5.1.1" /> {#listDir}

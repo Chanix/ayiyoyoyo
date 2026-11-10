@@ -14,12 +14,6 @@ layout: doc
 
 创建新的小应用（从空白骨架开始）。
 
-::: info 注意
-与 createRemote / createLocalhost 对称，由基座生成最小骨架：
-appchip.json + webroot/index.html + js/mainwin\_on\_loaded.js。
-空白模板不抓取图标，返回结果 icon 恒为 False。
-:::
-
 | 参数 | 类型 | 说明 |
 |:---|:---|:---|
 | config | object | 小应用配置，必须包含 id 和 name。 |
@@ -227,11 +221,6 @@ const res = await __A.appchip.pack('myapp', 'C:/out');
 
 清空指定小应用的数据目录内容，保留目录本身。
 
-::: info 注意
-数据目录对应 getDirData()，程序目录不受影响。
-目录不存在视为成功。
-:::
-
 | 参数 | 类型 | 说明 |
 |:---|:---|:---|
 | appchip_id | string | (可选) 小应用标识。默认为 null（即当前小应用）。 |
@@ -247,11 +236,6 @@ const res = await __A.appchip.resetData('myapp');
 ## resetDirWebview(appchip_id) <Badge type="tip" text="Since 25.10.28" /> {#resetDirWebview}
 
 清空指定小应用的浏览器数据目录内容，保留目录本身。
-
-::: info 注意
-浏览器数据目录对应 getDirWebview()，程序目录与数据目录不受影响。
-目录不存在视为成功。
-:::
 
 | 参数 | 类型 | 说明 |
 |:---|:---|:---|

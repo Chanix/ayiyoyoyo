@@ -21,6 +21,12 @@ layout: doc
 
 运行指定可执行文件（不等待），返回进程号。
 
+::: info 注意
+bin\_name 为命令名（而非绝对路径）时需在 PATH 中；
+cmd 内置命令（如 dir、echo）需自行经 \`cmd /c\` 调用。
+params 按 POSIX shell 规则解析，Windows 路径含空格需自行加引号。
+:::
+
 | 参数 | 类型 | 说明 |
 |:---|:---|:---|
 | bin_name | string | 可执行文件路径或命令名。 |
@@ -42,6 +48,12 @@ if (res.ok) console.log('pid:', res.pid);
 ## executeWait(bin_name, params) <Badge type="tip" text="Since 25.5.1.1" /> {#executeWait}
 
 运行指定可执行文件并等待其结束，返回执行结果。
+
+::: info 注意
+bin\_name 为命令名（而非绝对路径）时需在 PATH 中；
+cmd 内置命令（如 dir、echo）需自行经 \`cmd /c\` 调用。
+params 按 POSIX shell 规则解析，Windows 路径含空格需自行加引号。
+:::
 
 | 参数 | 类型 | 说明 |
 |:---|:---|:---|
@@ -82,6 +94,10 @@ const alive = await __A.process.exists(1234);
 ## getInformation(pid) <Badge type="tip" text="Since 25.5.1.1" /> {#getInformation}
 
 获取指定进程的详细信息。
+
+::: info 注意
+info 为 psutil.Process.as\_dict() 的结果，字段名见 psutil 文档，跨版本可能变化。
+:::
 
 | 参数 | 类型 | 说明 |
 |:---|:---|:---|

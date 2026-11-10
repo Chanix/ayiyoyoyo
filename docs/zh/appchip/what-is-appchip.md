@@ -52,7 +52,7 @@ layout: doc
 | `win_resizable`                     | bool   | true             | 窗口可调整大小             |
 | `win_fullscreen`                    | bool   | false            | 全屏启动                   |
 | `wv_open_external_links_in_browser` | bool   | true             | 用浏览器打开外部链接       |
-| `wv_allow_downloads`                | bool   | false            | 允许下载                   |
+| `wv_allow_downloads`                | bool   | true            | 允许下载                   |
 | `wv_allow_file_urls`                | bool   | true             | 允许文件链接               |
 | `wv_open_devtools_in_debug`         | bool   | true             | 调试模式下自动打开调试窗口 |
 | `wv_remote_debugging_port`          | int    | null             | 远程调试端口               |
@@ -60,7 +60,8 @@ layout: doc
 | `wv_webview2_runtime_path`          | string | null             | webview2 组件路径          |
 | `port`                              | int    | 0                | 本地服务使用的端口号       |
 | `ssl`                               | bool   | false            | 本地服务使用 ssl           |
-| `user_agent`                        | string | null             | 指定 UserAgent             |
+| `user_agent`                        | string | 系统默认             | 指定 UserAgent             |
+| `text_select`                        | bol | true             | 允许选定页面字符             |
 
 ::: danger 注意
 小应用标识请使用工具生成，以免造成重复。以 `ayiyoyoyo` 或者 `_` 开头的为保留用途，请勿使用。

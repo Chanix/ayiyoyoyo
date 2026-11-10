@@ -342,6 +342,7 @@ export default defineConfig({
                             {text: 'python&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 执行', link: '/zh/jsapi/JsapiPython'},
                             {text: 'runtime&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;运行时环境', link: '/zh/jsapi/JsapiRuntime'},
                             {text: 'shell&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shell 交互', link: '/zh/jsapi/JsapiShell'},
+                            {text: 'storage&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localStorage', link: '/zh/jsapi/JsapiStorage'},
                             {text: 'sqlite3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sqlite3 数据库', link: '/zh/jsapi/JsapiSqlite3'},
                         ],
                     },
