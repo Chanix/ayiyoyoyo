@@ -2,7 +2,7 @@
 layout: doc
 ---
 
-# ayiyoyoyo.api.appchip <Badge type="tip" text="Since 25.5.1.1" />
+# ayiyoyoyo.api.appchip <Badge type="tip" text="Since 26.11.11.1" />
 
 管理小应用，包括运行、安装、卸载、打包等。
 
@@ -10,7 +10,7 @@ layout: doc
 本模块仅供 ayiyoyoyo 专用，如非必要请不要使用。
 :::
 
-## createBlank(config) <Badge type="tip" text="Since 25.10.28" /> {#createBlank}
+## createBlank(config) <Badge type="tip" text="Since 26.11.11.1" /> {#createBlank}
 
 创建新的小应用（从空白骨架开始）。
 
@@ -31,7 +31,7 @@ const res = await __A.appchip.createBlank({
 });
 ```
 
-## createLocalhost(config, src_dir) <Badge type="tip" text="Since 25.5.1.1" /> {#createLocalhost}
+## createLocalhost(config, src_dir) <Badge type="tip" text="Since 26.11.11.1" /> {#createLocalhost}
 
 创建新的小应用（包装本地网站）。
 
@@ -50,7 +50,7 @@ const res = await __A.appchip.createBlank({
 const res = await __A.appchip.createLocalhost({ name: '我的应用' }, 'path');
 ```
 
-## createRemote(config) <Badge type="tip" text="Since 25.5.1.1" /> {#createRemote}
+## createRemote(config) <Badge type="tip" text="Since 26.11.11.1" /> {#createRemote}
 
 创建新的小应用（包装远程网站）。
 
@@ -71,7 +71,7 @@ const res = await __A.appchip.createRemote({
 });
 ```
 
-## exist(appchip_id) <Badge type="tip" text="Since 25.5.1.1" /> {#exist}
+## exist(appchip_id) <Badge type="tip" text="Since 26.11.11.1" /> {#exist}
 
 判断指定小应用是否已安装。
 
@@ -87,7 +87,7 @@ const res = await __A.appchip.createRemote({
 await __A.appchip.exist('default');
 ```
 
-## getDirAppchip(appchip_id) <Badge type="tip" text="Since 25.5.1.1" /> {#getDirAppchip}
+## getDirAppchip(appchip_id) <Badge type="tip" text="Since 26.11.11.1" /> {#getDirAppchip}
 
 获取指定小应用的程序目录。
 
@@ -109,7 +109,7 @@ const dir = await __A.appchip.getDirAppchip('default');
 const currentDir = await __A.appchip.getDirAppchip(); // 默认为当前小应用
 ```
 
-## getDirData(appchip_id) <Badge type="tip" text="Since 25.5.1.1" /> {#getDirData}
+## getDirData(appchip_id) <Badge type="tip" text="Since 26.11.11.1" /> {#getDirData}
 
 获取指定小应用的数据目录。
 
@@ -126,7 +126,7 @@ await __A.appchip.getDirData();
 await __A.appchip.getDirData('default');
 ```
 
-## getDirWebview(appchip_id) <Badge type="tip" text="Since 25.5.1.1" /> {#getDirWebview}
+## getDirWebview(appchip_id) <Badge type="tip" text="Since 26.11.11.1" /> {#getDirWebview}
 
 获取指定小应用的浏览器控件数据目录。
 
@@ -143,7 +143,7 @@ await __A.appchip.getDirWebview();
 await __A.appchip.getDirWebview('default');
 ```
 
-## installFromUrl(url) <Badge type="tip" text="Since 25.5.1.1" /> {#installFromUrl}
+## installFromUrl(url) <Badge type="tip" text="Since 26.11.11.1" /> {#installFromUrl}
 
 从指定网址下载 zip 并安装小应用。
 
@@ -159,7 +159,7 @@ await __A.appchip.getDirWebview('default');
 const res = await __A.appchip.installFromUrl('https://example.com/myapp.zip');
 ```
 
-## installFromZip(zip_file) <Badge type="tip" text="Since 25.5.1.1" /> {#installFromZip}
+## installFromZip(zip_file) <Badge type="tip" text="Since 26.11.11.1" /> {#installFromZip}
 
 从 zip 文件安装小应用（覆盖安装）。
 
@@ -175,7 +175,7 @@ const res = await __A.appchip.installFromUrl('https://example.com/myapp.zip');
 const res = await __A.appchip.installFromZip('C:/downloads/myapp.zip');
 ```
 
-## isKitAvailable() <Badge type="tip" text="Since 25.5.1.1" /> {#isKitAvailable}
+## isKitAvailable() <Badge type="tip" text="Since 26.11.11.1" /> {#isKitAvailable}
 
 判断同目录下是否存在 DEBUG 版（Kit）执行文件。
 
@@ -187,7 +187,7 @@ const res = await __A.appchip.installFromZip('C:/downloads/myapp.zip');
 const ok = await __A.appchip.isKitAvailable();
 ```
 
-## list() <Badge type="tip" text="Since 25.5.1.1" /> {#list}
+## list() <Badge type="tip" text="Since 26.11.11.1" /> {#list}
 
 获取所有已安装的小应用列表（不包含以 '\_' 开头的小应用）。
 
@@ -200,7 +200,7 @@ const ok = await __A.appchip.isKitAvailable();
 const all_appchips = await __A.appchip.list();
 ```
 
-## pack(appchip_id, out_dir) <Badge type="tip" text="Since 25.5.1.1" /> {#pack}
+## pack(appchip_id, out_dir) <Badge type="tip" text="Since 26.11.11.1" /> {#pack}
 
 将已安装的小应用打包为可分发的 zip。
 
@@ -217,7 +217,7 @@ const all_appchips = await __A.appchip.list();
 const res = await __A.appchip.pack('myapp', 'C:/out');
 ```
 
-## resetDirData(appchip_id) <Badge type="tip" text="Since 25.10.28" /> {#resetDirData}
+## resetDirData(appchip_id) <Badge type="tip" text="Since 26.11.11.1" /> {#resetDirData}
 
 清空指定小应用的数据目录内容，保留目录本身。
 
@@ -233,7 +233,7 @@ const res = await __A.appchip.pack('myapp', 'C:/out');
 const res = await __A.appchip.resetData('myapp');
 ```
 
-## resetDirWebview(appchip_id) <Badge type="tip" text="Since 25.10.28" /> {#resetDirWebview}
+## resetDirWebview(appchip_id) <Badge type="tip" text="Since 26.11.11.1" /> {#resetDirWebview}
 
 清空指定小应用的浏览器数据目录内容，保留目录本身。
 
@@ -249,7 +249,7 @@ const res = await __A.appchip.resetData('myapp');
 const res = await __A.appchip.resetWebview('myapp');
 ```
 
-## run(appchip_id, params, in_debug_mode) <Badge type="tip" text="Since 25.5.1.1" /> {#run}
+## run(appchip_id, params, in_debug_mode) <Badge type="tip" text="Since 26.11.11.1" /> {#run}
 
 以独立进程运行指定小应用（不等待其结束）。
 
@@ -274,7 +274,7 @@ const pid2 = await __A.appchip.run('myapp', '--verbose', false);
 const pid3 = await __A.appchip.run('myapp', '', true);
 ```
 
-## runWait(appchip_id, params, in_debug_mode) <Badge type="tip" text="Since 25.5.1.1" /> {#runWait}
+## runWait(appchip_id, params, in_debug_mode) <Badge type="tip" text="Since 26.11.11.1" /> {#runWait}
 
 运行指定小应用并等待其执行完毕，返回运行结果。
 
@@ -293,7 +293,7 @@ const result = await __A.appchip.runWait('default');
 console.log(result.retcode, result.stdout, result.stderr);
 ```
 
-## uninstall(appchip_id, purge) <Badge type="tip" text="Since 25.5.1.1" /> {#uninstall}
+## uninstall(appchip_id, purge) <Badge type="tip" text="Since 26.11.11.1" /> {#uninstall}
 
 卸载指定小应用。
 

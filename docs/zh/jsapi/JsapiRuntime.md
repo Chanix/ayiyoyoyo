@@ -2,13 +2,13 @@
 layout: doc
 ---
 
-# ayiyoyoyo.api.runtime <Badge type="tip" text="Since 25.5.1.1" />
+# ayiyoyoyo.api.runtime <Badge type="tip" text="Since 26.11.11.1" />
 
 运行时信息与控制。
 
 提供当前应用运行时的信息与操作。
 
-## exit(retcode) <Badge type="tip" text="Since 25.5.1.1" /> {#exit}
+## exit(retcode) <Badge type="tip" text="Since 26.11.11.1" /> {#exit}
 
 退出当前应用。
 
@@ -21,7 +21,7 @@ await __A.runtime.exit();       // 正常退出
 await __A.runtime.exit(1);      // 异常退出，返回码 1
 ```
 
-## noop() <Badge type="tip" text="Since 25.5.1.1" /> {#noop}
+## noop() <Badge type="tip" text="Since 26.11.11.1" /> {#noop}
 
 空操作。
 

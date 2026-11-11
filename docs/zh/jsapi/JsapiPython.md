@@ -2,7 +2,7 @@
 layout: doc
 ---
 
-# ayiyoyoyo.api.python <Badge type="tip" text="Since 25.5.1.1" />
+# ayiyoyoyo.api.python <Badge type="tip" text="Since 26.11.11.1" />
 
 Python 支持
 
@@ -34,7 +34,7 @@ Python 支持
 通过本模块可以获得 python 的强大能力，使用风险自担。
 :::
 
-## exec(pysrc) <Badge type="tip" text="Since 25.5.1.1" /> {#exec}
+## exec(pysrc) <Badge type="tip" text="Since 26.11.11.1" /> {#exec}
 
 执行一段 Python 源码，返回结构化结果。
 
@@ -50,7 +50,7 @@ Python 支持
 await __A.python.exec("__result__ = 12345");
 ```
 
-## execFile(py_filepath) <Badge type="tip" text="Since 25.5.1.1" /> {#execFile}
+## execFile(py_filepath) <Badge type="tip" text="Since 26.11.11.1" /> {#execFile}
 
 执行指定的 python 文件。
 

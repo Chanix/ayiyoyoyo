@@ -2,11 +2,11 @@
 layout: doc
 ---
 
-# ayiyoyoyo.api.shell <Badge type="tip" text="Since 25.5.1.1" />
+# ayiyoyoyo.api.shell <Badge type="tip" text="Since 26.11.11.1" />
 
 系统 Shell 交互。
 
-## open(target) <Badge type="tip" text="Since 25.5.1.1" /> {#open}
+## open(target) <Badge type="tip" text="Since 26.11.11.1" /> {#open}
 
 用系统默认方式打开路径或 URL。
 

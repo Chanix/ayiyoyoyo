@@ -2,7 +2,7 @@
 layout: doc
 ---
 
-# ayiyoyoyo.api.process <Badge type="tip" text="Since 25.5.1.1" />
+# ayiyoyoyo.api.process <Badge type="tip" text="Since 26.11.11.1" />
 
 进程管理与操作。
 
@@ -17,7 +17,7 @@ layout: doc
 通过本模块可以终止任意进程，使用风险自担。
 :::
 
-## execute(bin_name, params) <Badge type="tip" text="Since 25.5.1.1" /> {#execute}
+## execute(bin_name, params) <Badge type="tip" text="Since 26.11.11.1" /> {#execute}
 
 运行指定可执行文件（不等待），返回进程号。
 
@@ -45,7 +45,7 @@ const res = await __A.process.execute('notepad.exe');
 if (res.ok) console.log('pid:', res.pid);
 ```
 
-## executeWait(bin_name, params) <Badge type="tip" text="Since 25.5.1.1" /> {#executeWait}
+## executeWait(bin_name, params) <Badge type="tip" text="Since 26.11.11.1" /> {#executeWait}
 
 运行指定可执行文件并等待其结束，返回执行结果。
 
@@ -75,7 +75,7 @@ const res = await __A.process.executeWait('python', '--version');
 console.log(res.retcode, res.stdout, res.stderr);
 ```
 
-## exists(pid) <Badge type="tip" text="Since 25.5.1.1" /> {#exists}
+## exists(pid) <Badge type="tip" text="Since 26.11.11.1" /> {#exists}
 
 检查指定进程是否存在。
 
@@ -91,7 +91,7 @@ console.log(res.retcode, res.stdout, res.stderr);
 const alive = await __A.process.exists(1234);
 ```
 
-## getInformation(pid) <Badge type="tip" text="Since 25.5.1.1" /> {#getInformation}
+## getInformation(pid) <Badge type="tip" text="Since 26.11.11.1" /> {#getInformation}
 
 获取指定进程的详细信息。
 
@@ -116,7 +116,7 @@ const res = await __A.process.getInformation(1234);
 if (res.ok) console.log(res.info.name, res.info.cpu_percent);
 ```
 
-## kill(pid) <Badge type="tip" text="Since 25.5.1.1" /> {#kill}
+## kill(pid) <Badge type="tip" text="Since 26.11.11.1" /> {#kill}
 
 强制终止指定进程。
 
@@ -142,7 +142,7 @@ UNIX 下发送 SIGKILL；Windows 下使用 TerminateProcess。
 const res = await __A.process.kill(1234);
 ```
 
-## list() <Badge type="tip" text="Since 25.5.1.1" /> {#list}
+## list() <Badge type="tip" text="Since 26.11.11.1" /> {#list}
 
 获取当前所有进程的 PID 列表。
 
@@ -154,7 +154,7 @@ const res = await __A.process.kill(1234);
 const pids = await __A.process.list();
 ```
 
-## resume(pid) <Badge type="tip" text="Since 25.5.1.1" /> {#resume}
+## resume(pid) <Badge type="tip" text="Since 26.11.11.1" /> {#resume}
 
 恢复指定进程。
 
@@ -177,7 +177,7 @@ UNIX 下发送 SIGCONT；Windows 下恢复所有线程。
 const res = await __A.process.resume(1234);
 ```
 
-## sendSignal(pid, signal) <Badge type="tip" text="Since 25.5.1.1" /> {#sendSignal}
+## sendSignal(pid, signal) <Badge type="tip" text="Since 26.11.11.1" /> {#sendSignal}
 
 向指定进程发送信号。
 
@@ -203,7 +203,7 @@ Windows 下仅支持 SIGTERM、CTRL\_C\_EVENT、CTRL\_BREAK\_EVENT，
 const res = await __A.process.sendSignal(1234, 15);  // SIGTERM
 ```
 
-## suspend(pid) <Badge type="tip" text="Since 25.5.1.1" /> {#suspend}
+## suspend(pid) <Badge type="tip" text="Since 26.11.11.1" /> {#suspend}
 
 挂起指定进程。
 
@@ -226,7 +226,7 @@ UNIX 下发送 SIGSTOP；Windows 下挂起所有线程。
 const res = await __A.process.suspend(1234);
 ```
 
-## terminate(pid) <Badge type="tip" text="Since 25.5.1.1" /> {#terminate}
+## terminate(pid) <Badge type="tip" text="Since 26.11.11.1" /> {#terminate}
 
 终止指定进程。
 

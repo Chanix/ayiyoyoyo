@@ -2,7 +2,7 @@
 layout: doc
 ---
 
-# ayiyoyoyo.api.sqlite3 <Badge type="tip" text="Since 25.5.1.1" />
+# ayiyoyoyo.api.sqlite3 <Badge type="tip" text="Since 26.11.11.1" />
 
 SQLite 数据库操作。
 
@@ -16,7 +16,7 @@ SQLite 数据库操作。
 才会落盘。如果希望单条 SQL 执行后立即提交，可传 auto\_commit=True。
 :::
 
-## begin(conn_id) <Badge type="tip" text="Since 25.5.1.1" /> {#begin}
+## begin(conn_id) <Badge type="tip" text="Since 26.11.11.1" /> {#begin}
 
 显式开始事务。
 
@@ -37,7 +37,7 @@ SQLite 在默认模式下会自动开启事务，通常不需要手动调用。
 await __A.sqlite3.begin(connId);
 ```
 
-## close(conn_id) <Badge type="tip" text="Since 25.5.1.1" /> {#close}
+## close(conn_id) <Badge type="tip" text="Since 26.11.11.1" /> {#close}
 
 关闭指定连接。
 
@@ -56,7 +56,7 @@ await __A.sqlite3.begin(connId);
 await __A.sqlite3.close(connId);
 ```
 
-## closeAll() <Badge type="tip" text="Since 25.5.1.1" /> {#closeAll}
+## closeAll() <Badge type="tip" text="Since 26.11.11.1" /> {#closeAll}
 
 关闭所有连接。
 
@@ -71,7 +71,7 @@ await __A.sqlite3.close(connId);
 await __A.sqlite3.closeAll();
 ```
 
-## commit(conn_id) <Badge type="tip" text="Since 25.5.1.1" /> {#commit}
+## commit(conn_id) <Badge type="tip" text="Since 26.11.11.1" /> {#commit}
 
 提交事务。
 
@@ -91,7 +91,7 @@ await __A.sqlite3.closeAll();
 await __A.sqlite3.commit(connId);
 ```
 
-## connect(database, timeout, uri) <Badge type="tip" text="Since 25.5.1.1" /> {#connect}
+## connect(database, timeout, uri) <Badge type="tip" text="Since 26.11.11.1" /> {#connect}
 
 打开一个 SQLite 数据库连接。
 
@@ -114,7 +114,7 @@ const res = await __A.sqlite3.connect('C:/data/my.db');
 if (res.ok) console.log(res.connId);
 ```
 
-## execute(conn_id, sql, params, auto_commit) <Badge type="tip" text="Since 25.5.1.1" /> {#execute}
+## execute(conn_id, sql, params, auto_commit) <Badge type="tip" text="Since 26.11.11.1" /> {#execute}
 
 执行非查询 SQL（INSERT / UPDATE / DELETE / DDL）。
 
@@ -148,7 +148,7 @@ await __A.sqlite3.commit(connId);
 await __A.sqlite3.execute(connId, 'INSERT INTO users (name) VALUES (?)', ['Tom'], true);
 ```
 
-## executeMany(conn_id, sql, params_list, auto_commit) <Badge type="tip" text="Since 25.5.1.1" /> {#executeMany}
+## executeMany(conn_id, sql, params_list, auto_commit) <Badge type="tip" text="Since 26.11.11.1" /> {#executeMany}
 
 批量执行同一条 SQL。
 
@@ -178,7 +178,7 @@ await __A.sqlite3.executeMany(connId,
 await __A.sqlite3.commit(connId);
 ```
 
-## getTableList(conn_id) <Badge type="tip" text="Since 25.5.1.1" /> {#getTableList}
+## getTableList(conn_id) <Badge type="tip" text="Since 26.11.11.1" /> {#getTableList}
 
 获取数据库中所有表名。
 
@@ -199,7 +199,7 @@ const res = await __A.sqlite3.getTableList(connId);
 console.log(res.tables);
 ```
 
-## isConnected(conn_id) <Badge type="tip" text="Since 25.5.1.1" /> {#isConnected}
+## isConnected(conn_id) <Badge type="tip" text="Since 26.11.11.1" /> {#isConnected}
 
 检查指定连接是否存在。
 
@@ -215,7 +215,7 @@ console.log(res.tables);
 const ok = await __A.sqlite3.isConnected(connId);
 ```
 
-## queryDicts(conn_id, sql, params) <Badge type="tip" text="Since 25.5.1.1" /> {#queryDicts}
+## queryDicts(conn_id, sql, params) <Badge type="tip" text="Since 26.11.11.1" /> {#queryDicts}
 
 执行 SELECT 查询，返回所有结果行（对象形式）。
 
@@ -240,7 +240,7 @@ const res = await __A.sqlite3.queryDicts(connId, 'SELECT * FROM users');
 // res.rows = [{id: 1, name: 'Tom'}, {id: 2, name: 'Jerry'}]
 ```
 
-## queryOne(conn_id, sql, params) <Badge type="tip" text="Since 25.5.1.1" /> {#queryOne}
+## queryOne(conn_id, sql, params) <Badge type="tip" text="Since 26.11.11.1" /> {#queryOne}
 
 执行 SELECT 查询，返回第一行。
 
@@ -263,7 +263,7 @@ const res = await __A.sqlite3.queryOne(connId, 'SELECT * FROM users WHERE id = ?
 if (res.ok && res.row) console.log(res.row.name);
 ```
 
-## queryRows(conn_id, sql, params) <Badge type="tip" text="Since 25.5.1.1" /> {#queryRows}
+## queryRows(conn_id, sql, params) <Badge type="tip" text="Since 26.11.11.1" /> {#queryRows}
 
 执行 SELECT 查询，返回所有结果行（列表形式）。
 
@@ -290,7 +290,7 @@ const res = await __A.sqlite3.queryRows(connId, 'SELECT id, name FROM users');
 // res.rows    = [[1, 'Tom'], [2, 'Jerry']]
 ```
 
-## rollback(conn_id) <Badge type="tip" text="Since 25.5.1.1" /> {#rollback}
+## rollback(conn_id) <Badge type="tip" text="Since 26.11.11.1" /> {#rollback}
 
 回滚事务。
 
