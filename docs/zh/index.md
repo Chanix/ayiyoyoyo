@@ -19,7 +19,7 @@ hero:
       link: /zh/getting-started
     - theme: alt
       text: 立即下载
-      link: https://github.com/Chanix/ayiyoyoyo/releases
+      link: https://github.com/Chanix/ayiyoyoyo-release/releases
 
 features:
   - title: "🌐 前端技术栈"
