@@ -8,7 +8,7 @@ hero:
   text: "不只打包，更是增强"
   tagline: "用前端技术开发跨平台桌面应用，JS 直通 Python 与本地能力，快速绿色交付。"
   image:
-    src: /icon.svg
+    src: /ayiyoyoyo.svg
     alt: ayiyoyoyo
   actions:
     - theme: brand

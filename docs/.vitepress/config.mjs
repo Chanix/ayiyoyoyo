@@ -27,8 +27,10 @@ export default defineConfig({
     },
 
     head: [
-        ['link', { rel: 'icon', href: '/icon.svg' }],
-        ['link', { rel: 'canonical', href: SITE_URL }],
+        ['link', {rel: 'icon', href: '/icon.svg'}],
+        ['link', {rel: 'canonical', href: SITE_URL}],
+
+
         // Open Graph
         // ['meta', { property: 'og:type', content: 'website' }],
         // ['meta', { property: 'og:site_name', content: 'ayiyoyoyo' }],
@@ -53,6 +55,8 @@ export default defineConfig({
         //         content: 'https://ayiyoyoyo.pages.dev/app.webp',
         //     },
         // ],
+
+
         // Additional SEO
         ['meta', {name: 'author', content: 'Chanix@github'}],
         [
@@ -231,59 +235,6 @@ export default defineConfig({
                     }
                 },
 
-                // sidebar: [
-                //     {
-                //         text: '新手上路',
-                //         collapsed: false,
-                //         items: [
-                //             {text: 'ayiyoyoyo 简介', link: '/zh/what-is-ayiyoyoyo'},
-                //             {text: '快速开始', link: '/zh/getting-started.md'},
-                //             {text: '命令行参数', link: '/zh/what-is-ayiyoyoyo'},
-                //             {text: '文件与目录结构', link: '/zh/what-is-ayiyoyoyo'},
-                //             {
-                //                 text: '小应用开发',
-                //                 items: [
-                //                     {text: '基础知识', link: '/zh/what-is-ayiyoyoyo'},
-                //                     {text: '开发流程', link: '/zh/getting-started.md'},
-                //                     {text: '如何分发', link: '/zh/advanced'},
-                //                     {text: '如何调试', link: '/zh/advanced'},
-                //                     {text: '进阶使用', link: '/zh/advanced'},
-                //                     {text: '如何提升性能', link: '/zh/advanced'},
-                //                     {text: '如何提升效率', link: '/zh/advanced'},
-                //                     {text: '如何扩展功能JS+PYTHON', link: '/zh/advanced'},
-                //                 ],
-                //             },
-                //         ],
-                //
-                //     },
-                //     {
-                //         text: 'JS 扩展与 API',
-                //         collapsed: false,
-                //         items: [
-                //             {text: '扩展对象概述', link: '/zh/jsapi'},
-                //             {
-                //                 items: [
-                //                     {text: '小应用　　　appchip', link: '/zh/jsapi/JsapiAppchip'},
-                //                     {text: '剪贴板　　　clipboard', link: '/zh/jsapi/JsapiClipboard'},
-                //                     {text: '对话框　　　dialog', link: '/zh/jsapi/JsapiDialog'},
-                //                     {text: '环境变量　　env', link: '/zh/jsapi/JsapiEnv'},
-                //                     {text: '进程管理　　process', link: '/zh/jsapi/JsapiProcess'},
-                //                     {text: 'python&nbsp;&nbsp;　　python', link: '/zh/jsapi/JsapiPython'},
-                //                     {text: 'Shell&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　Shell', link: '/zh/jsapi/JsapiShell'},
-                //                     // {text: '开机自启　　autostart', link: './jsapi/autostart'},
-                //                     // {text: '基础功能　　core', link: './jsapi/core'},
-                //                     // {text: '设备信息　　device', link: './jsapi/device'},
-                //                     // {text: '文件系统　　fsys', link: './jsapi/fsys'},
-                //                     // {text: '全局热键　　hotkey', link: './jsapi/hotkey'},
-                //                     // {text: '主窗口　　　mainwin', link: './jsapi/mainwin'},
-                //                     // {text: '内存数据库　memdb', link: './jsapi/memdb'},
-                //                     // {text: '进程管理　　process', link: './jsapi/process'},
-                //                     // {text: '属性数据　　properties', link: './jsapi/properties'},
-                //                 ]
-                //             },
-                //         ],
-                //     },
-                // ],
                 sidebar: [
                     {
                         text: '新手上路',
@@ -302,48 +253,51 @@ export default defineConfig({
                             {text: '小应用简介', link: '/zh/what-is-appchip'},
                             {text: '开发流程', link: '/zh/workflow'},
                             {text: '调试方法', link: '/zh/debugging'},
-                            {text: '打包与分发', link: '/zh/packaging'},
+                            {text: '打包分发', link: '/zh/packaging'},
                             {text: '常见问题', link: '/zh/faq'},
                         ],
                     },
-                    // {
-                    //     text: '进阶主题',
-                    //     collapsed: false,
-                    //     items: [
-                    //         {text: '提升性能', link: '/zh/appchip/performance'},
-                    //         // {text: '提升效率', link: '/zh/appchip/advanced/productivity'},
-                    //         {text: '扩展功能（JS + Python）', link: '/zh/appchip/advanced/extend-js-python'},
-                    //     ],
-                    // },
-                    // {
-                    //     text: '示例',
-                    //     collapsed: false,
-                    //     items: [
-                    //         {text: '示例总览', link: '/zh/examples/'},
-                    //         {text: '包装远程网站', link: '/zh/examples/remote-website'},
-                    //         {text: '包装本地网站', link: '/zh/examples/local-website'},
-                    //         {text: '调用 Python', link: '/zh/examples/call-python'},
-                    //         {text: '事件处理', link: '/zh/examples/events'},
-                    //         {text: '打包分发', link: '/zh/examples/packaging'},
-                    //     ],
-                    // },
                     {
                         text: 'JS 扩展与 API',
                         collapsed: false,
                         items: [
                             {text: '扩展对象概述', link: '/zh/jsapi'},
-                            {text: 'appchip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小应用管理', link: '/zh/jsapi/JsapiAppchip'},
-                            {text: 'clipboard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;剪贴板', link: '/zh/jsapi/JsapiClipboard'},
+                            {
+                                text: 'appchip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小应用管理',
+                                link: '/zh/jsapi/JsapiAppchip'
+                            },
+                            {
+                                text: 'clipboard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;剪贴板',
+                                link: '/zh/jsapi/JsapiClipboard'
+                            },
                             // {text: 'dialog&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对话框', link: '/zh/jsapi/JsapiDialog'},
-                            {text: 'env&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;环境变量', link: '/zh/jsapi/JsapiEnv'},
+                            {
+                                text: 'env&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;环境变量',
+                                link: '/zh/jsapi/JsapiEnv'
+                            },
                             // {text: 'fs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件系统', link: '/zh/jsapi/JsapiFs'},
                             // {text: 'mainwin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主窗口', link: '/zh/jsapi/JsapiMainwin'},
-                            {text: 'process&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;进程管理', link: '/zh/jsapi/JsapiProcess'},
-                            {text: 'python&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 执行', link: '/zh/jsapi/JsapiPython'},
-                            // {text: 'runtime&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;运行时环境', link: '/zh/jsapi/JsapiRuntime'},
-                            {text: 'shell&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shell 交互', link: '/zh/jsapi/JsapiShell'},
+                            {
+                                text: 'process&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;进程管理',
+                                link: '/zh/jsapi/JsapiProcess'
+                            },
+                            {
+                                text: 'python&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 执行',
+                                link: '/zh/jsapi/JsapiPython'
+                            },
+                            {
+                                text: 'runtime&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;运行时环境',
+                                link: '/zh/jsapi/JsapiRuntime'
+                            },
+                            {
+                                text: 'shell&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shell 交互',
+                                link: '/zh/jsapi/JsapiShell'
+                            },
                             // {text: 'storage&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localStorage', link: '/zh/jsapi/JsapiStorage'},
-                            {text: 'sqlite3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sqlite3 数据库', link: '/zh/jsapi/JsapiSqlite3'},
+                            {
+                                text: 'sqlite3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sqlite3 数据库',
+                                link: '/zh/jsapi/JsapiSqlite3'
+                            },
                         ],
                     },
                 ],
@@ -395,7 +349,7 @@ export default defineConfig({
         },
         // 基础配置
         logo: {
-            src: '/icon.svg',
+            src: '/ayiyoyoyo.svg',
             alt: 'ayiyoyoyo',
         },
     },

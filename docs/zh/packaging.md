@@ -2,7 +2,7 @@
 layout: doc
 ---
 
-# 打包与分发 {#packaging}
+# 打包分发 {#packaging}
 
 小应用开发完成后，打包成 zip 分发给用户。
 
