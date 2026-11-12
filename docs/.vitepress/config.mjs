@@ -28,10 +28,10 @@ export default defineConfig({
 
     head: [
         ['link', { rel: 'icon', href: '/icon.svg' }],
-        // ['link', { rel: 'canonical', href: SITE_URL }],
+        ['link', { rel: 'canonical', href: SITE_URL }],
         // Open Graph
         // ['meta', { property: 'og:type', content: 'website' }],
-        // ['meta', { property: 'og:site_name', content: 'PakePlus' }],
+        // ['meta', { property: 'og:site_name', content: 'ayiyoyoyo' }],
         // ['meta', { property: 'og:url', content: SITE_URL }],
         // [
         //     'meta',
