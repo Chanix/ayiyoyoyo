@@ -88,7 +88,7 @@ console.log('mainwin_on_loaded');
 
 产物文件名固定为 `<appchip-id>.zip`。
 
-详见[打包与分发](/zh/appchip/packaging)。
+详见[打包与分发](/zh/packaging)。
 
 ## 7. 分发
 
@@ -97,7 +97,3 @@ console.log('mainwin_on_loaded');
 - **从文件安装**：用户选择本地 zip
 - **从网址安装**：用户填入 zip 的 URL
 
-## 下一步
-
-- [调试方法](/zh/debugging) —— 更详细的调试技巧
-- [打包与分发](/zh/appchip/packaging) —— 分发完整流程

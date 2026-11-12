@@ -65,4 +65,4 @@ DevTools 是调试前端代码的主要工具，和 Chrome 的开发者工具一
 
 ## 下一步
 
-- [打包与分发](/zh/appchip/packaging) —— 分发完整流程
+- [打包与分发](/zh/packaging) —— 分发完整流程
