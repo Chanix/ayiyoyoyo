@@ -293,7 +293,10 @@ export default defineConfig({
                                 text: 'shell&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shell 交互',
                                 link: '/zh/jsapi/JsapiShell'
                             },
-                            // {text: 'storage&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localStorage', link: '/zh/jsapi/JsapiStorage'},
+                            {
+                                text: 'storage&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localStorage',
+                                link: '/zh/jsapi/JsapiStorage'
+                            },
                             {
                                 text: 'sqlite3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sqlite3 数据库',
                                 link: '/zh/jsapi/JsapiSqlite3'

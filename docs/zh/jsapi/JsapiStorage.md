@@ -2,36 +2,25 @@
 layout: doc
 ---
 
-# ayiyoyoyo.api.storage <Badge type="tip" text="Since 25.10.28" />
+# ayiyoyoyo.api.storage <Badge type="tip" text="Since 26.12.12.1" />
 
 小应用级 key-value 存储。
 
-接口与浏览器 localStorage 同名，但为\*\*异步\*\*调用。
-数据存放于 appdata/data/<appchip\_id>/\_storage.json，扁平 JSON 对象，
-键和值均为字符串，不依赖页面 Origin，与 HTTP 端口无关。
+本模块目的为快速平替 localStorage，实现简单的 KV 存储。
 
-::: info 注意
-- 值严格按 str() 转字符串存储，存结构请自行 JSON.stringify。
-- setItem / removeItem / clear 会立即写入磁盘。
-- 不提供 storage 事件，多窗口并发写以最后写入者为准。
-- 与基座内部的 \_properties.json 完全独立。
-- 当前实现每次调用都读写磁盘文件；若出现高频调用导致的性能问题，
-  可加进程内缓存，见 \_read\_data 处的 TODO。
-:::
+- 本模块接口与 localStorage 一一对应，但为异步调用；
+- 不提供 storage 事件，多窗口并发写以最后写入者为准；
+- 数据存放于 appdata/data/<appchip\_id>/\_storage.json；
 
-## clear() <Badge type="tip" text="Since 25.10.28" /> {#clear}
+## clear() <Badge type="tip" text="Since 26.12.12.1" /> {#clear}
 
 清空全部键值对，立即写入磁盘。
-
-::: info 注意
-文件不存在时视为成功，不创建空文件。
-:::
 
 ```javascript
 await __A.storage.clear();
 ```
 
-## getItem(key) <Badge type="tip" text="Since 25.10.28" /> {#getItem}
+## getItem(key) <Badge type="tip" text="Since 26.12.12.1" /> {#getItem}
 
 读取指定键的值。
 
@@ -47,7 +36,7 @@ await __A.storage.clear();
 const v = await __A.storage.getItem('theme');
 ```
 
-## key(index) <Badge type="tip" text="Since 25.10.28" /> {#key}
+## key(index) <Badge type="tip" text="Since 26.12.12.1" /> {#key}
 
 按插入顺序返回指定索引的键。
 
@@ -63,7 +52,7 @@ const v = await __A.storage.getItem('theme');
 const k = await __A.storage.key(0);
 ```
 
-## length() <Badge type="tip" text="Since 25.10.28" /> {#length}
+## length() <Badge type="tip" text="Since 26.12.12.1" /> {#length}
 
 获取键的数量。
 
@@ -79,7 +68,7 @@ localStorage 的 length 是属性，这里由于 jsapi 为异步调用，做成�
 const n = await __A.storage.length();
 ```
 
-## removeItem(key) <Badge type="tip" text="Since 25.10.28" /> {#removeItem}
+## removeItem(key) <Badge type="tip" text="Since 26.12.12.1" /> {#removeItem}
 
 删除指定键，立即写入磁盘。
 
@@ -95,7 +84,7 @@ const n = await __A.storage.length();
 await __A.storage.removeItem('theme');
 ```
 
-## setItem(key, value) <Badge type="tip" text="Since 25.10.28" /> {#setItem}
+## setItem(key, value) <Badge type="tip" text="Since 26.12.12.1" /> {#setItem}
 
 设置键值对，立即写入磁盘。
 
