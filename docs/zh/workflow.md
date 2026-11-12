@@ -33,7 +33,7 @@ layout: doc
 - 用 Vue / React 等框架，构建后把产物放进 `webroot/`
 - 直接包装已有的网站
 
-入口由 `appchip.json` 的 `url` 字段决定。支持四种运行模式，详见[什么是小应用](/zh/appchip/what-is-appchip#运行模式)。
+入口由 `appchip.json` 的 `url` 字段决定。支持四种运行模式，详见[什么是小应用](/zh/what-is-appchip#运行模式)。
 
 ## 3. 调用扩展
 
@@ -66,7 +66,7 @@ console.log('mainwin_on_loaded');
 
 这些脚本在事件触发时由框架注入页面执行，可以访问 `window`，直接操作 DOM。
 
-支持的事件见[什么是小应用](/zh/appchip/what-is-appchip#js)。
+支持的事件见[什么是小应用](/zh/what-is-appchip#js)。
 
 ## 5. 调试
 
@@ -99,5 +99,5 @@ console.log('mainwin_on_loaded');
 
 ## 下一步
 
-- [调试方法](/zh/appchip/debugging) —— 更详细的调试技巧
+- [调试方法](/zh/debugging) —— 更详细的调试技巧
 - [打包与分发](/zh/appchip/packaging) —— 分发完整流程

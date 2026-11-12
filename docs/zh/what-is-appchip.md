@@ -16,8 +16,8 @@ layout: doc
     ├─ appchip.ico      Window 图标（可选）
     ├─ appchip.png      Linux  图标（可选）
     ├─ appchip.icns     MacOS  图标（可选）
-    ├─ js/              事件处理脚本
-    └─ webroot/         网站根目录（本地使用）
+    ├─ js/              事件处理脚本（可选）
+    └─ webroot/         网站根目录（可选）
 ```
 
 ### appchip.json
@@ -36,8 +36,8 @@ layout: doc
 
 | 字段                                | 类型   | 默认值           | 说明                       |
 |-------------------------------------|--------|------------------|----------------------------|
-| `id`                                | string |                  | 小应用唯一标识，36 字符    |
-| `name`                              | string | $id              | 小应用的名称               |
+| `id`                                | string |                  | 小应用唯一标识             |
+| `name`                              | string | $id              | 小应用名称                 |
 | `version`                           | string | "0.0.0.1"        | 版本号                     |
 | `description`                       | string | ""               | 小应用描述                 |
 | `author`                            | string | ""               | 作者                       |
@@ -52,7 +52,7 @@ layout: doc
 | `win_resizable`                     | bool   | true             | 窗口可调整大小             |
 | `win_fullscreen`                    | bool   | false            | 全屏启动                   |
 | `wv_open_external_links_in_browser` | bool   | true             | 用浏览器打开外部链接       |
-| `wv_allow_downloads`                | bool   | true            | 允许下载                   |
+| `wv_allow_downloads`                | bool   | true             | 允许下载                   |
 | `wv_allow_file_urls`                | bool   | true             | 允许文件链接               |
 | `wv_open_devtools_in_debug`         | bool   | true             | 调试模式下自动打开调试窗口 |
 | `wv_remote_debugging_port`          | int    | null             | 远程调试端口               |
@@ -60,8 +60,8 @@ layout: doc
 | `wv_webview2_runtime_path`          | string | null             | webview2 组件路径          |
 | `port`                              | int    | 0                | 本地服务使用的端口号       |
 | `ssl`                               | bool   | false            | 本地服务使用 ssl           |
-| `user_agent`                        | string | 系统默认             | 指定 UserAgent             |
-| `text_select`                        | bol | true             | 允许选定页面字符             |
+| `user_agent`                        | string | 系统默认         | 指定 UserAgent             |
+| `text_select`                       | bol    | true             | 允许选定页面字符           |
 
 ::: danger 注意
 小应用标识请使用工具生成，以免造成重复。以 `ayiyoyoyo` 或者 `_` 开头的为保留用途，请勿使用。
@@ -73,7 +73,7 @@ layout: doc
 
 命名规则：`mainwin_on_<事件名>.js`
 
-当对应事件触发时，框架会读取这个文件并通过 `exec_js` 注入页面执行。
+当对应事件触发时，会读取这个文件并注入页面执行。
 
 支持的事件：
 
@@ -87,12 +87,12 @@ layout: doc
 | moved     | `mainwin_on_moved.js`     | 主窗口移动后                |
 | resized   | `mainwin_on_resized.js`   | 主窗口缩放后                |
 
-事件脚本可以访问页面的 `window`，因此可以直接操作 DOM、调用 `__A` 扩展。
+事件脚本可以访问页面的 `window`，因此可以直接操作 DOM、调用扩展。
 
 ::: tip 提示
 moved 和 resized 事件做了防抖处理。
 
-如果需要对无法控制源代码的网页进行注入，在 loaded 事件中写就可以了。
+如果需要对无法控制源代码的网页进行注入，可以写在 loaded 事件中。
 :::
 
 ### webroot/

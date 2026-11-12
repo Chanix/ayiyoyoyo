@@ -14,14 +14,14 @@ ayiyoyoyo 是绿色软件，下载后解压到您希望存放的地方（例：`
 
 ### 运行依赖
 
-ayiyoyoyo 已经考虑到了环境依赖，理论上开包即用。
-如果运行出现问题，请对照下面的环境要求，检查是否满足。同时也请通知我们，这让我们能做得更好。
+ayiyoyoyo 已经考虑到了环境依赖。
+如果出现问题，请参照下面检查是否满足系统需求。
 
 #### Windows
 
 需要 Windows 10 及以上操作系统，依赖系统自带的 WebView2。
 
-[//]: # (正常情况下都有，少数精简版可能没有。详情请参阅：[分发应用和 WebView2 运行时]&#40;https://learn.microsoft.com/zh-cn/microsoft-edge/webview2/concepts/distribution?tabs=dotnetcsharp&#41;。)
+正常版本系统内置，少数精简版可能需要额外安装，请参阅：[分发应用和 WebView2 运行时](https://learn.microsoft.com/zh-cn/microsoft-edge/webview2/concepts/distribution?tabs=dotnetcsharp) 。
 
 #### Linux
 
