@@ -27,7 +27,7 @@ export default defineConfig({
     },
 
     head: [
-        // ['link', { rel: 'icon', href: 'https://ayiyoyoyo.pages.dev/app.svg' }],
+        ['link', { rel: 'icon', href: '/icon.svg' }],
         // ['link', { rel: 'canonical', href: SITE_URL }],
         // Open Graph
         // ['meta', { property: 'og:type', content: 'website' }],
