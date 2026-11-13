@@ -276,7 +276,10 @@ export default defineConfig({
                                 link: '/zh/jsapi/JsapiEnv'
                             },
                             // {text: 'fs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件系统', link: '/zh/jsapi/JsapiFs'},
-                            // {text: 'mainwin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主窗口', link: '/zh/jsapi/JsapiMainwin'},
+                            {
+                                text: 'mainwin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主窗口',
+                                link: '/zh/jsapi/JsapiMainwin'
+                            },
                             {
                                 text: 'process&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;进程管理',
                                 link: '/zh/jsapi/JsapiProcess'
