@@ -251,6 +251,7 @@ export default defineConfig({
                         collapsed: false,
                         items: [
                             {text: '小应用简介', link: '/zh/what-is-appchip'},
+                            {text: '四种运行模式', link: '/zh/run-modes'},
                             {text: '开发流程', link: '/zh/workflow'},
                             {text: '调试方法', link: '/zh/debugging'},
                             {text: '打包分发', link: '/zh/packaging'},
@@ -272,10 +273,21 @@ export default defineConfig({
                             },
                             // {text: 'dialog&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对话框', link: '/zh/jsapi/JsapiDialog'},
                             {
+                                text: 'download&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下载',
+                                link: '/zh/jsapi/JsapiDownload'
+                            },
+                            {
                                 text: 'env&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;环境变量',
                                 link: '/zh/jsapi/JsapiEnv'
                             },
-                            // {text: 'fs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件系统', link: '/zh/jsapi/JsapiFs'},
+                            {
+                                text: 'fs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件系统',
+                                link: '/zh/jsapi/JsapiFs'
+                            },
+                            {
+                                text: 'Http&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http',
+                                link: '/zh/jsapi/JsapiHttp'
+                            },
                             {
                                 text: 'mainwin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主窗口',
                                 link: '/zh/jsapi/JsapiMainwin'

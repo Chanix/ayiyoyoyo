@@ -21,7 +21,7 @@ ayiyoyoyo 已经考虑到了环境依赖。
 
 需要 Windows 10 及以上操作系统，依赖系统自带的 WebView2。
 
-正常版本系统内置，少数精简版可能需要额外安装，请参阅：[分发应用和 WebView2 运行时](https://learn.microsoft.com/zh-cn/microsoft-edge/webview2/concepts/distribution?tabs=dotnetcsharp) 。
+正常版本系统内置，少数精简版可能需要额外安装，请参阅：[分发应用和 WebView2 运行时](https://learn.microsoft.com/zh-cn/microsoft-edge/webview2/concepts/distribution?tabs=dotnetcsharp)  和 [下载 Microsoft Edge WebView2](https://developer.microsoft.com/zh-cn/microsoft-edge/webview2/consumer/?cs=2775290602&form=MA13LH)。
 
 #### Linux
 

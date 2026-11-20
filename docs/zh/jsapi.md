@@ -20,20 +20,28 @@ window.addEventListener('ayiyoyoyoReady', function () {
 
 ## 属性
 
-| 名称               | 类型   | 说明                 |
-|--------------------|--------|----------------------|
-| `api`              | object | JS 扩展对象          |
-| `appchip_dir_data` | string | 小应用的数据保存目录 |
-| `appchip_id`       | string | 小应用的标识         |
-| `cwd`              | string | 工作目录             |
-| `debug`            | bool   | 调试状态             |
-| `dir_home`         | string | 用户主目录           |
-| `dir_temp`         | string | 当前系统临时目录     |
-| `pid`              | number | 当前进程号           |
-| `platform`         | string | webview 平台         |
-| `sep_env`          | string | 环境变量分隔符       |
-| `sep_path`         | string | 目录路径分隔符       |
-| `token`            | string | 令牌                 |
+| 名称               | 类型   | 说明                 | 版本   |
+|--------------------|--------|----------------------|------------|
+| `api`              | object | JS 扩展对象          | 26.11.11.1 |
+| `appchip_dir_data` | string | 小应用的数据保存目录 | 26.11.11.1 |
+| `appchip_id`       | string | 小应用的标识         | 26.11.11.1 |
+| `cwd`              | string | 工作目录             | 26.11.11.1 |
+| `debug`            | bool   | 调试状态             | 26.11.11.1 |
+| `dir_home`         | string | 用户主目录           | 26.11.11.1 |
+| `dir_temp`         | string | 当前系统临时目录     | 26.11.11.1 |
+| `pid`              | number | 当前进程号           | 26.11.11.1 |
+| `platform`         | string | webview 平台         | 26.11.11.1 |
+| `sep_env`          | string | 环境变量分隔符       | 26.11.11.1 |
+| `sep_path`         | string | 目录路径分隔符       | 26.11.11.1 |
+| `token`            | string | 令牌                 | 26.11.11.1 |
+
+[//]: # (| `version_python`            | string | python 版本 | 26.12.12.1 |)
+
+[//]: # (| `version_ayiyoyoyo`            | string | ayiyoyoyo 版本 | 26.12.12.1 |)
+
+[//]: # (| `os_type`            | string | 操作系统 | 26.12.12.1 |)
+
+[//]: # (| `os_arch`            | string | 硬件架构 | 26.12.12.1 |)
 
 ## api 调用与返回
 
@@ -59,7 +67,6 @@ ayiyoyoyo 以宁缺毋滥的态度来增加模块和功能，现有扩展已满�
 
 ::: warning 系统兼容性
 由于操作系统的差异，某些模块和功能存在差异或仅被限定的操作系统支持。
-
 
 我们会尽可能保证跨平台一致性，但依然需要开发者注意差异并**做好测试**。
 :::

@@ -92,7 +92,7 @@ layout: doc
 ::: tip 提示
 moved 和 resized 事件做了防抖处理。
 
-如果需要对无法控制源代码的网页进行注入，可以写在 loaded 事件中。
+如果需要对无法控制源代码的网页进行注入，可以写在 mainwin_on_loaded.js 中。
 :::
 
 ### webroot/

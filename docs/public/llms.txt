@@ -1,0 +1,1782 @@
+# ayiyoyoyo JS API 参考
+
+> 由 tools/make_jsapi_doc.py 从 jsapi_impl 的 docstring 自动生成，请勿手工编辑；如需修改内容请改 docstring。
+> 基座版本 26.12.12
+> 模块 17 ｜ 方法 139
+
+所有接口均为异步：`await __A.<模块>.<方法>(...)`，返回 Promise。参数标注 `=` 者为可选；返回值以 `{字段(类型)}` 表示。
+
+## appchip
+
+管理小应用，包括运行、安装、卸载、打包等
+
+- 警告：本模块仅供 ayiyoyoyo 专用，如非必要请不要使用
+
+### createBlank(config) -> object
+
+创建新的小应用（从空白骨架开始）
+
+- 参数：`config`（object）小应用配置，必须包含 id 和 name
+- 返回：`object` 创建结果，包含 ok / id / msg / path / icon
+
+```javascript
+const res = await __A.appchip.createBlank({
+    id: 'my-app',
+    name: '我的应用',
+    win_width: 1024,
+    win_height: 768,
+});
+```
+
+### createLocalhost(config, src_dir) -> object
+
+创建新的小应用（包装本地网站）。
+
+将指定的本地网站目录整体复制到新小应用的 webroot/ 下，入口固定为 index.html
+
+- 参数：`config`（object）小应用配置，字段见下方 @example；`src_dir`（string）本地网站目录的完整路径
+- 返回：`object` 创建结果，包含 ok / id / msg / path / icon
+
+```javascript
+const res = await __A.appchip.createLocalhost({ name: '我的应用' }, 'path');
+```
+
+### createRemote(config) -> object
+
+创建新的小应用（包装远程网站）
+
+- 参数：`config`（object）小应用配置，字段见下方 @example
+- 返回：`object` 创建结果，包含 ok / id / msg / path / icon
+
+```javascript
+const res = await __A.appchip.createRemote({
+    name: '我的应用',
+    url: 'https://example.com',
+    win_width: 1280,
+    win_height: 800,
+});
+```
+
+### exist(appchip_id) -> boolean
+
+判断指定小应用是否已安装
+
+- 参数：`appchip_id`（string）小应用标识
+- 返回：`boolean` 小应用是否存在
+
+```javascript
+await __A.appchip.exist('default');
+```
+
+### getDirAppchip(appchip_id=null) -> string | null
+
+获取指定小应用的程序目录
+
+- 参数：`appchip_id`（string，可选）小应用标识。默认为 null（即当前小应用）
+- 返回：`string | null` 小应用程序目录的绝对路径；内置小应用返回 null
+- 注意：仅按规范拼接路径，不检查指定小应用是否真实存在；内置小应用无磁盘目录，返回 None
+
+```javascript
+const dir = await __A.appchip.getDirAppchip('default');
+const currentDir = await __A.appchip.getDirAppchip(); // 默认为当前小应用
+```
+
+### getDirData(appchip_id=null) -> string
+
+获取指定小应用的数据目录
+
+- 参数：`appchip_id`（string，可选）小应用标识。默认为 null（即当前小应用）
+- 返回：`string` 小应用数据目录的绝对路径
+
+```javascript
+await __A.appchip.getDirData();
+await __A.appchip.getDirData('default');
+```
+
+### getDirWebview(appchip_id=null) -> string
+
+获取指定小应用的浏览器控件数据目录
+
+- 参数：`appchip_id`（string，可选）小应用标识。默认为 null（即当前小应用）
+- 返回：`string` 小应用浏览器控件数据目录的绝对路径
+
+```javascript
+await __A.appchip.getDirWebview();
+await __A.appchip.getDirWebview('default');
+```
+
+### installFromUrl(url) -> object
+
+从指定网址下载 zip 并安装小应用
+
+- 参数：`url`（string）zip 文件的下载地址
+- 返回：`object` 安装结果，包含 ok / id / msg
+
+```javascript
+const res = await __A.appchip.installFromUrl('https://example.com/myapp.zip');
+```
+
+### installFromZip(zip_file) -> object
+
+从 zip 文件安装小应用（覆盖安装）
+
+- 参数：`zip_file`（string）zip 文件路径
+- 返回：`object` 安装结果，包含 ok / id / msg
+
+```javascript
+const res = await __A.appchip.installFromZip('C:/downloads/myapp.zip');
+```
+
+### isKitAvailable() -> boolean
+
+判断同目录下是否存在 DEBUG 版（Kit）执行文件
+
+- 返回：`boolean` Kit 版是否可用
+
+```javascript
+const ok = await __A.appchip.isKitAvailable();
+```
+
+### list() -> array
+
+获取所有已安装的小应用列表（不包含以 '_' 开头的小应用）
+
+- 返回：`array` 按小应用 ID 升序排列的对象列表
+
+```javascript
+// 获取所有已安装的小应用列表（包括默认小应用）
+const all_appchips = await __A.appchip.list();
+```
+
+### pack(appchip_id, out_dir) -> object
+
+将已安装的小应用打包为可分发的 zip
+
+- 参数：`appchip_id`（string）小应用标识；`out_dir`（string）输出目录的完整路径
+- 返回：`object` 打包结果，包含 ok / id / msg / path / size / overwritten
+
+```javascript
+const res = await __A.appchip.pack('myapp', 'C:/out');
+```
+
+### resetDirData(appchip_id=null) -> object
+
+清空指定小应用的数据目录内容，保留目录本身
+
+- 参数：`appchip_id`（string，可选）小应用标识。默认为 null（即当前小应用）
+- 返回：`object` 结果，包含 ok / id / msg
+
+```javascript
+const res = await __A.appchip.resetData('myapp');
+```
+
+### resetDirWebview(appchip_id=null) -> object
+
+清空指定小应用的浏览器数据目录内容，保留目录本身
+
+- 参数：`appchip_id`（string，可选）小应用标识。默认为 null（即当前小应用）
+- 返回：`object` 结果，包含 ok / id / msg
+
+```javascript
+const res = await __A.appchip.resetWebview('myapp');
+```
+
+### run(appchip_id=null, params='', in_debug_mode=null) -> number
+
+以独立进程运行指定小应用（不等待其结束）。
+
+根据 in_debug_mode 选择生产版或 DEBUG 版（Kit）执行文件：
+- in_debug_mode=True  → 启动同目录的 xxxKit 版本；
+- in_debug_mode=False → 启动当前执行文件（生产版）；
+- in_debug_mode=None  → 取 ayiyoyoyo.is_debug（默认行为）
+
+- 参数：`appchip_id`（string，可选）小应用标识。默认为 null（即当前小应用）；`params`（string，可选）附加命令行参数，按 shell 规则解析。默认为 ""；`in_debug_mode`（boolean，可选）是否以 DEBUG 模式运行
+- 返回：`number` 新运行小应用的进程号（PID）
+
+```javascript
+const pid = await __A.appchip.run('myapp');
+const pid2 = await __A.appchip.run('myapp', '--verbose', false);
+const pid3 = await __A.appchip.run('myapp', '', true);
+```
+
+### runWait(appchip_id=null, params='', in_debug_mode=null) -> object
+
+运行指定小应用并等待其执行完毕，返回运行结果
+
+- 参数：`appchip_id`（string，可选）小应用标识。默认为 null（即当前小应用）；`params`（string，可选）附加命令行参数，按 shell 规则解析。默认为 ""；`in_debug_mode`（boolean，可选）是否以 DEBUG 模式运行
+- 返回：`object` 执行结果，包含 retcode / stdout / stderr
+
+```javascript
+const result = await __A.appchip.runWait('default');
+console.log(result.retcode, result.stdout, result.stderr);
+```
+
+### uninstall(appchip_id, purge=false) -> object
+
+卸载指定小应用。
+
+- 当 purge 为 True 时，删除小应用的程序包、数据目录与 Webview 数据目录；
+- 当 purge 为 False 时，仅删除程序包，保留数据
+
+- 参数：`appchip_id`（string）小应用标识；`purge`（boolean，可选）是否彻底删除所有相关数据。默认为 false
+- 返回：`object` 卸载结果，包含 ok / id / msg
+
+```javascript
+await __A.appchip.uninstall('myapp');
+await __A.appchip.uninstall('myapp', true);
+```
+
+## autostart
+
+开机自启动管理。
+
+为指定小应用设置、取消、查询开机自启动。
+
+支持：
+- Windows：启动目录下的 .lnk 快捷方式
+- Linux：~/.config/autostart/ 下的 .desktop 文件
+- macOS：~/Library/LaunchAgents/ 下的 plist
+
+### disable(appchip_id=null) -> boolean
+
+取消指定小应用的开机自启动
+
+- 参数：`appchip_id`（string，可选）小应用标识。默认为 null（即当前小应用）
+- 返回：`boolean` 是否取消成功
+
+```javascript
+await __A.autostart.disable();
+await __A.autostart.disable('myapp');
+```
+
+### enable(appchip_id=null) -> boolean
+
+设置指定小应用开机自启动
+
+- 参数：`appchip_id`（string，可选）小应用标识。默认为 null（即当前小应用）
+- 返回：`boolean` 是否设置成功
+
+```javascript
+await __A.autostart.enable();
+await __A.autostart.enable('myapp');
+```
+
+### isEnabled(appchip_id=null) -> boolean
+
+查询指定小应用是否已设置开机自启动
+
+- 参数：`appchip_id`（string，可选）小应用标识。默认为 null（即当前小应用）
+- 返回：`boolean` 是否已设置
+
+```javascript
+const on = await __A.autostart.isEnabled();
+```
+
+## clipboard
+
+提供系统剪贴板读写能力，支持文本与图片。
+图片以 base64 编码的 PNG 格式传输
+
+### clear()
+
+清空剪贴板
+
+
+```javascript
+await __A.clipboard.clear();
+```
+
+### getImage() -> string
+
+从剪贴板读取图片，返回 base64 编码的 PNG
+
+- 返回：`string` base64 编码的 PNG 图片数据；若剪贴板中无图片或读取失败，返回空字符串
+
+```javascript
+const b64 = await __A.clipboard.getImage();
+if (b64) document.querySelector('#preview').src =
+    `data:image/png;base64,${b64}`;
+```
+
+### getText() -> string
+
+获取剪贴板中的文本
+
+- 返回：`string` 剪贴板文本；若剪贴板为空或读取失败，返回空字符串
+
+```javascript
+text = await __A.clipboard.getText();
+```
+
+### setImage(base64_data)
+
+将 base64 编码的图片写入剪贴板
+
+- 参数：`base64_data`（string）base64 编码的图片数据（PNG/JPG 均可，内部会统一转为 RGBA 像素）
+
+```javascript
+await __A.clipboard.setImage(base64String);
+```
+
+### setText(text='')
+
+将文本写入剪贴板
+
+- 参数：`text`（string）要复制的文本，默认空字符串
+
+```javascript
+await __A.clipboard.setText("this is a text");
+```
+
+## dialog
+
+提供对原生系统对话框的支持
+
+支持以下几种：
+- 打开文件
+- 保存文件
+- 选择文件夹
+- 确认框
+
+参数中文件扩展名的定义：
+
+类型1 (*.ext11;*.ext12;*.ext13...) | 类型2 (*.ext21;*.ext22;*.ext23...) ...
+
+例如：
+    文本文件 (*.txt;*.md) | 程序源码 (*.c;*.py;*.java;*.cpp)
+
+### confirm(message='', title='') -> boolean
+
+确认对话框
+
+- 参数：`message`（string，可选）对话框内容，默认为 ''；`title`（string，可选）对话框标题，默认为 ''
+- 返回：`boolean` 选择 确认 返回 true，其他返回 false
+
+```javascript
+await __A.dialog.confirm('真的确认下一步操作吗？', '请确认');
+```
+
+### openDir(directory=null, allow_multiple=false) -> array | null
+
+选择文件夹（目录）对话框
+
+- 参数：`directory`（string，可选）打开的目录路径，默认为 null；`allow_multiple`（boolean，可选）是否允许多选，默认为 false
+- 返回：`array | null` 选择的所有文件列表，取消或其他退出返回 null
+
+```javascript
+await __A.dialog.openDir();
+
+await __A.dialog.openDir(null, true);
+
+await __A.dialog.openDir('', false);
+```
+
+### openFile(directory=null, file_types_in_str=null, allow_multiple=false) -> array | null
+
+打开文件对话框
+
+- 参数：`directory`（string，可选）打开的目录路径，默认为 null；`file_types_in_str`（string，可选）文件扩展名，默认为 " (*.*)"。参见本模块文件扩展名定义说明；`allow_multiple`（boolean，可选）是否允许多选，默认为 false
+- 返回：`array | null` 选择的所有文件列表，取消或其他退出返回 null
+
+```javascript
+await __A.dialog.openFile();
+
+await __A.dialog.openFile(null, '所有文件 (*.*) | 文档文件 (*.doc;*.md;*.txt) | 程序源码 (*.c;*.cpp;*.py;*.java)', true);
+```
+
+### saveFile(directory=null, file_types_in_str=null) -> array | null
+
+另存为对话框
+
+- 参数：`directory`（string，可选）打开的目录路径，默认为 null；`file_types_in_str`（string，可选）文件扩展名，默认为 " (*.*)"。参见本模块文件扩展名定义说明
+- 返回：`array | null` 选择的所有文件列表，取消或其他退出返回 null
+
+```javascript
+await __A.dialog.saveFile();
+
+await __A.dialog.saveFile(null, '所有文件 (*.*) | 文档文件 (*.doc;*.md;*.txt) | 程序源码 (*.c;*.cpp;*.py;*.java)');
+```
+
+## download
+
+下载文件，提供同步结果、可轮询的进度，以及取消能力。
+
+设计要点：
+- download 阻塞到下载结束，返回 {ok, path, size, error}，前端直接 await。
+- download 在 bridge 工作线程执行，不碰任何 GUI，线程安全。
+- progress() 只读一个加锁的字典，可在 download 阻塞期间被并发调用。
+- cancel() 设置取消标志，下载线程在下一轮读循环检查后中断。
+- 同一时刻只维护一份“当前下载进度”，不支持并发下载（第一版）。
+- 支持 Referer 和 User-Agent，应对需要防盗链的站点。
+- 文件名来源优先级：显式 file_name > Content-Disposition > URL 路径。
+- overwrite=True（默认）时覆盖同名文件；overwrite=False 时自动加 (1)、(2) 后缀
+
+### cancel() -> object
+
+请求取消当前下载。
+
+只是设置取消标志，实际中断发生在下载线程的下一次读循环检查。
+read() 本身阻塞在 socket 上，最多等一个分块读取时间或超时
+
+- 返回：`object` {ok: bool, msg: str}
+
+```javascript
+await __A.download.cancel();
+```
+
+### download(url, file_name='', save_dir='', referer='', user_agent='', overwrite=true) -> object
+
+同步下载文件，阻塞到结束才返回
+
+- 参数：`url`（string）下载地址，仅支持 http/https；`file_name`（string，可选）文件名或绝对路径。为空时由服务器或 URL 决定；`save_dir`（string，可选）保存目录。为空时用当前工作目录；`referer`（string，可选）Referer 头，为空时不发送；`user_agent`（string，可选）User-Agent 头，为空时用内置浏览器 UA；`overwrite`（boolean，可选）目标文件已存在时是否覆盖。默认为 true
+- 返回：`object` {ok(boolean): 是否成功；path(string | null): 实际保存的绝对路径，失败时为 null；size(number | null): 文件字节数，失败时为 null；error(string): 错误信息，成功时为空串；取消时为 'Cancelled by user.'}
+- 注意：文件名来源优先级：显式 file_name > Content-Disposition > URL 路径；保存目录由 save_dir 决定，为空时用当前工作目录；下载过程中先写临时文件，确定最终文件名后再原子重命名；overwrite=True（默认）时覆盖同名文件；overwrite=False 时自动加 (1)、(2) 后缀
+
+```javascript
+const res = await __A.download.download(
+    'https://example.com/a.zip', '', '/home/user/Downloads',
+    'https://example.com/page.html');
+// 不覆盖同名文件
+const res2 = await __A.download.download(
+    'https://example.com/a.zip', '', '/home/user/Downloads',
+    '', '', false);
+```
+
+### progress() -> object
+
+获取当前下载进度。
+
+可在 download 阻塞期间被并发调用。返回值是快照
+
+- 返回：`object` state / downloaded / total / speed / error / path
+
+```javascript
+const p = await __A.download.progress();
+if (p.total) bar.value = p.downloaded / p.total * 100;
+```
+
+## env
+
+提供对环境变量的读写能力
+
+- 注意：作用域为当前进程及其拉起的子进程（如 __A.process 启动的程序）；修改不会持久化到操作系统（Windows 注册表 / Linux shell 配置），进程退出即失效；Windows 上变量名不区分大小写，写入后统一以大写存储；Linux 上区分大小写；非字符串值一律经 str() 转换后写入（注意：JS 的 true 会变成 'True' 而非 'true'）
+- 危险：items()/values() 会导出全部环境变量（可能包含密钥等敏感信息）；set() 可修改 PATH 等变量，影响子进程行为。使用风险自担
+
+### get(name, default=null) -> string | null
+
+读取环境变量
+
+- 参数：`name`（string）变量名；`default`（any，可选）变量不存在时的默认值。默认为 null
+- 返回：`string | null` 变量值（str），或 str(default)；default 为 null 时返回 null
+- 注意：default 非 None 时会被 str() 转换后返回（如传 42 得到 '42'）
+
+```javascript
+const v = await __A.env.get('PATH');
+const v2 = await __A.env.get('NOT_EXIST', 'fallback');
+```
+
+### has(name) -> boolean
+
+判断环境变量是否存在
+
+- 参数：`name`（string）变量名
+- 返回：`boolean` 存在返回 true，否则 false
+- 注意：Windows 上按不区分大小写匹配；空字符串值也算存在
+
+```javascript
+if (await __A.env.has('PATH')) { /* ... */ }
+```
+
+### items() -> dict[str, str]
+
+获取全部环境变量（键值对）快照
+
+- 返回：`dict[str, str]` 环境变量的键值对字典。Windows 上键为大写形态
+- 危险：导出全部环境变量，可能包含密钥等敏感信息。使用风险自担
+
+```javascript
+const all = await __A.env.items();
+```
+
+### keys() -> array
+
+获取全部环境变量的键快照
+
+- 返回：`array` 环境变量名列表。Windows 上为大写形态
+
+```javascript
+const names = await __A.env.keys();
+```
+
+### pop(name, default=null) -> string | null
+
+删除环境变量并返回其原值
+
+- 参数：`name`（string）变量名；`default`（any，可选）变量不存在时返回的默认值。默认为 null
+- 返回：`string | null` 被删除变量的原值（str），或 str(default)；default 为 null 时返回 null
+- 注意：default 非 None 时会被 str() 转换后返回
+
+```javascript
+const old = await __A.env.pop('MY_VAR');
+```
+
+### set(name, value=null) -> null
+
+设置环境变量。value 为 None 时等价于删除该变量
+
+- 参数：`name`（string）变量名。不能为空，不能包含 '=' 或空字符；`value`（any，可选）变量值。默认为 null（删除该变量）
+- 返回：`null` 无返回值
+- 注意：非 None 的 value 会被 str() 转换为字符串后写入（true → 'True'）；仅作用于当前进程及其子进程，不持久化到系统
+
+```javascript
+await __A.env.set('MY_VAR', 'hello');
+await __A.env.set('MY_VAR', 42);       // 写入 '42'
+await __A.env.set('MY_VAR');           // 删除 MY_VAR
+```
+
+### unset(name) -> null
+
+删除环境变量。变量不存在时静默成功
+
+- 参数：`name`（string）变量名
+- 返回：`null` 无返回值
+
+```javascript
+await __A.env.unset('MY_VAR');
+```
+
+### update(mapping) -> null
+
+批量设置环境变量
+
+- 参数：`mapping`（dict[str, any]）变量名到值的映射
+- 返回：`null` 无返回值
+- 注意：与 set 语义一致：值经 str() 转换；值为 None 的键会被删除；整批在本模块锁内顺序执行；非法变量名会抛错（此前已写入的键不回滚）
+
+```javascript
+await __A.env.update({ MY_VAR: 'hello', OTHER: 42, TO_REMOVE: null });
+```
+
+### values() -> array
+
+获取全部环境变量的值快照
+
+- 返回：`array` 环境变量值列表
+- 危险：导出全部环境变量值，可能包含密钥等敏感信息。使用风险自担
+
+```javascript
+const vals = await __A.env.values();
+```
+
+## fs
+
+文件系统操作。
+
+提供读写文本、二进制、目录操作等能力，以当前用户权限运行
+
+### basename(path) -> string
+
+获取路径的文件名部分
+
+- 参数：`path`（string）路径
+- 返回：`string` 文件名，失败时为空字符串
+- 注意：发生异常时返回空字符串
+
+```javascript
+const name = await __A.fs.basename('C:/a/b.txt');  // name === 'b.txt'
+```
+
+### copy(src, dst, overwrite=false) -> object
+
+复制文件或目录
+
+- 参数：`src`（string）源路径；`dst`（string）目标路径；`overwrite`（boolean，可选）目标已存在时是否覆盖。默认 false
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述}
+- 注意：文件用 shutil.copy2（保留元数据）；目录用 shutil.copytree；默认 overwrite=False，目标已存在则失败；目录 overwrite=True 时先删目标目录再复制（不合并）
+
+```javascript
+await __A.fs.copy('C:/a.txt', 'C:/a.bak');
+await __A.fs.copy('C:/dir', 'C:/dir2', true);
+```
+
+### dirname(path) -> string
+
+获取路径的父目录部分
+
+- 参数：`path`（string）路径
+- 返回：`string` 父目录，失败时为空字符串
+- 注意：发生异常时返回空字符串
+
+```javascript
+const dir = await __A.fs.dirname('C:/a/b.txt');  // dir === 'C:/a'
+```
+
+### exists(path) -> boolean
+
+判断路径是否存在
+
+- 参数：`path`（string）路径
+- 返回：`boolean` 路径是否存在
+- 注意：内部吞掉 OSError，权限不足、路径非法等情况也返回 False
+
+```javascript
+const ok = await __A.fs.exists('C:/a.txt');
+if (ok) console.log('存在');
+```
+
+### isDir(path) -> boolean
+
+判断路径是否为目录
+
+- 参数：`path`（string）路径
+- 返回：`boolean` 路径是否为目录
+- 注意：内部吞掉 OSError，权限不足、路径非法等情况也返回 False
+
+```javascript
+const ok = await __A.fs.isDir('C:/dir');
+if (ok) console.log('是目录');
+```
+
+### isFile(path) -> boolean
+
+判断路径是否为文件
+
+- 参数：`path`（string）路径
+- 返回：`boolean` 路径是否为文件
+- 注意：内部吞掉 OSError，权限不足、路径非法等情况也返回 False
+
+```javascript
+const ok = await __A.fs.isFile('C:/a.txt');
+if (ok) console.log('是文件');
+```
+
+### join() -> string
+
+拼接路径
+
+- 返回：`string` 拼接结果，失败时为空字符串
+- 注意：用系统分隔符拼接，自动处理多余的分隔符；无参数或发生异常时返回空字符串
+
+```javascript
+const p = await __A.fs.join('C:/a', 'b', 'c.txt');
+// p === 'C:/a/b/c.txt'（Windows 下为 C:\a\b\c.txt）
+```
+
+### listDir(path) -> object
+
+列出目录内容（不递归）
+
+- 参数：`path`（string）目录路径
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述；entries(array | null): 条目列表，每项含：；name(string): 名称；path(string): 完整路径；is_file (bool)；is_dir (bool)；size(number): 字节数（目录为 0）；mtime(number): 修改时间戳}
+
+```javascript
+const res = await __A.fs.listDir('C:/dir');
+if (res.ok) for (const e of res.entries) console.log(e.name, e.is_dir);
+```
+
+### mkdirs(path) -> object
+
+递归创建目录（含所有需要的父目录）
+
+- 参数：`path`（string）目录路径
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述；created(boolean): 是否本次新建（已存在为 false）}
+- 注意：目录已存在时不报错
+
+```javascript
+await __A.fs.mkdirs('C:/a/b/c');
+```
+
+### readBase64(path) -> object
+
+读取二进制文件并返回 base64
+
+- 参数：`path`（string）文件路径
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述；base64(string | null): base64 内容（成功时）；size(number | null): 字节数（成功时）}
+
+```javascript
+const res = await __A.fs.readBase64('C:/a.png');
+if (res.ok) img.src = 'data:image/png;base64,' + res.base64;
+```
+
+### readText(path, encoding='utf-8-sig') -> object
+
+读取文本文件
+
+- 参数：`path`（string）文件路径；`encoding`（string，可选）编码，默认 'utf-8-sig'
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述；text(string | null): 文件内容（成功时）}
+
+```javascript
+const res = await __A.fs.readText('C:/a.txt');
+if (res.ok) console.log(res.text);
+```
+
+### remove(path) -> object
+
+删除文件或空目录
+
+- 参数：`path`（string）路径
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述}
+- 注意：路径不存在时视为已删除，返回成功；目录非空时会失败，请用 rmtree
+
+```javascript
+await __A.fs.remove('C:/a.txt');
+```
+
+### rename(src, dst) -> object
+
+重命名或移动文件/目录
+
+- 参数：`src`（string）源路径；`dst`（string）目标路径
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述}
+- 注意：目标已存在时覆盖（文件/空目录），非空目录会失败
+
+```javascript
+await __A.fs.rename('C:/a.txt', 'C:/b.txt');
+```
+
+### rmtree(path) -> object
+
+递归删除目录及其内容
+
+- 参数：`path`（string）目录路径
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述}
+- 注意：路径不存在时视为已删除，返回成功
+
+```javascript
+await __A.fs.rmtree('C:/dir');
+```
+
+### stat(path) -> object
+
+获取路径的元信息
+
+- 参数：`path`（string）路径
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述；info(object | null): 元信息，含 size / mtime / ctime / is_file / is_dir / mode}
+
+```javascript
+const res = await __A.fs.stat('C:/a.txt');
+if (res.ok) console.log(res.info.size);
+```
+
+### writeBase64(path, b64, mkdir=false) -> object
+
+将 base64 写入二进制文件（原子写）
+
+- 参数：`path`（string）文件路径；`b64`（string）base64 字符串；`mkdir`（boolean，可选）父目录不存在时是否自动创建。默认 false
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述；size(number | null): 写入字节数（成功时）}
+- 注意：默认 mkdir=False，父目录不存在则报错；兼容 data URL 前缀（data:image/png;base64,xxx）
+
+```javascript
+await __A.fs.writeBase64('C:/a.png', base64Str);
+```
+
+### writeText(path, text, encoding='utf-8', mkdir=false) -> object
+
+写入文本文件（原子写：临时文件 + 替换）
+
+- 参数：`path`（string）文件路径；`text`（string）文本内容；`encoding`（string，可选）编码，默认 'utf-8'；`mkdir`（boolean，可选）父目录不存在时是否自动创建。默认 false
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述；size(number | null): 写入字节数（成功时）}
+- 注意：默认 mkdir=False，父目录不存在则报错；写入统一用 utf-8，不写 BOM
+
+```javascript
+const res = await __A.fs.writeText('C:/a.txt', 'hello');
+const res2 = await __A.fs.writeText('C:/new/dir/a.txt', 'hi', 'utf-8', true);
+```
+
+## http
+
+通用 HTTP 请求，返回结构化响应。
+
+设计要点：
+- request 同步阻塞到拿到响应，返回 {ok, status, headers, text, json, error}。
+- ok=True 表示请求完成并拿到响应（不代表 status 是 2xx）。
+- ok=False 表示连接失败、超时、DNS/SSL 错误等“没拿到响应”的情况。
+- 在 Python 侧发请求，绕开内联 HTML 模式下前端 fetch 的 CORS/Origin 限制。
+- 零新依赖，基于 urllib。
+- 不支持进度和取消；大文件传输请用 JsapiDownload
+
+### request(method, url, headers=null, body=null, timeout=30.0) -> object
+
+发起一次 HTTP 请求，阻塞到拿到响应
+
+- 参数：`method`（string）HTTP 方法，如 'GET'、'POST'；`url`（string）请求地址，仅支持 http/https；`headers`（object，可选）请求头。键值会转成字符串；`body`（string，可选）请求体文本。为 null 时不发送 body；`timeout`（number，可选）连接与读取超时（秒），默认 30
+- 返回：`object` {ok(boolean): 请求是否完成并拿到响应；status(number | null): HTTP 状态码，失败时为 null；headers(object): 响应头，键名小写；text(string | null): 响应体文本，失败时为 null；json(any | null): 响应体为 JSON 且解析成功时的结果；error(string): 错误信息，成功时为空串}
+- 注意：method 支持 GET/POST/PUT/DELETE/PATCH/HEAD 等，大小写不敏感；body 为字符串时按 UTF-8 编码发送；未指定 Content-Type 时默认 text/plain；重定向由 urllib 默认跟随；响应头键名统一转小写；响应 Content-Type 含 application/json 时，尝试解析到 json 字段
+
+```javascript
+const res = await __A.http.request('GET', 'https://api.example.com/users');
+if (res.ok && res.status === 200) console.log(res.json);
+
+const res2 = await __A.http.request('POST', 'https://api.example.com/users',
+    { 'Content-Type': 'application/json' },
+    JSON.stringify({ name: 'Alice' }));
+```
+
+## lab
+
+试验室，试验性的代码，仅供 ayiyoyoyo 开发测试
+
+- 危险：非 ayiyoyoyo 开发人员请不要使用本模块，本模块没有任何保证
+
+## mainwin
+
+提供对主窗口的操作，包括显示、隐藏、移动、缩放、标题、置顶等
+
+### getHeight() -> number
+
+获取窗口高度
+
+- 返回：`number` 高度（像素）
+
+```javascript
+const h = await __A.mainwin.getHeight();
+```
+
+### getOnTop() -> boolean
+
+获取窗口是否置顶
+
+- 返回：`boolean` 是否置顶
+
+```javascript
+const onTop = await __A.mainwin.getOnTop();
+```
+
+### getState() -> number
+
+获取窗口当前状态
+
+- 返回：`number` 窗口状态： -1 未知, 0 最小化, 1 普通, 2 最大化
+
+```javascript
+const state = await __A.mainwin.getState();
+if (state === 2) console.log('窗口已最大化');
+```
+
+### getStatus() -> object
+
+获取窗口的综合状态
+
+- 返回：`object` {x(number): 窗口左上角 X 坐标；y(number): 窗口左上角 Y 坐标；width(number): 窗口宽度；height(number): 窗口高度；title(string): 窗口标题；ontop(boolean): 是否置顶；state(number): 窗口状态： -1 未知, 0 最小化, 1 普通, 2 最大化}
+
+```javascript
+const s = await __A.mainwin.getStatus();
+console.log(s.x, s.y, s.width, s.height, s.state);
+```
+
+### getTitle() -> string
+
+获取窗口标题
+
+- 返回：`string` 当前窗口标题
+
+```javascript
+const title = await __A.mainwin.getTitle();
+```
+
+### getWidth() -> number
+
+获取窗口宽度
+
+- 返回：`number` 宽度（像素）
+
+```javascript
+const w = await __A.mainwin.getWidth();
+```
+
+### getX() -> number
+
+获取窗口左上角 X 坐标
+
+- 返回：`number` X 坐标
+
+```javascript
+const x = await __A.mainwin.getX();
+```
+
+### getY() -> number
+
+获取窗口左上角 Y 坐标
+
+- 返回：`number` Y 坐标
+
+```javascript
+const y = await __A.mainwin.getY();
+```
+
+### hide()
+
+隐藏主窗口
+
+
+```javascript
+await __A.mainwin.hide();
+```
+
+### loadCss(css)
+
+注入 CSS
+
+- 参数：`css`（string）CSS 源码
+
+```javascript
+await __A.mainwin.loadCss('body { background: #000; }');
+```
+
+### loadHtml(htmlcode)
+
+加载 HTML 源码
+
+- 参数：`htmlcode`（string）HTML 源码
+
+```javascript
+await __A.mainwin.loadHtml('<h1>Hello</h1>');
+```
+
+### loadUrl(url)
+
+加载指定 URL
+
+- 参数：`url`（string）目标 URL
+
+```javascript
+await __A.mainwin.loadUrl('https://example.com');
+```
+
+### maximize()
+
+最大化窗口
+
+
+```javascript
+await __A.mainwin.maximize();
+```
+
+### minimize()
+
+最小化窗口
+
+
+```javascript
+await __A.mainwin.minimize();
+```
+
+### move(x, y)
+
+移动窗口到指定坐标
+
+- 参数：`x`（number）X 坐标；`y`（number）Y 坐标
+
+```javascript
+await __A.mainwin.move(100, 100);
+```
+
+### reload()
+
+刷新当前页面
+
+
+```javascript
+await __A.mainwin.reload();
+```
+
+### resize(width, height)
+
+调整窗口尺寸
+
+- 参数：`width`（number）新宽度；`height`（number）新高度
+
+```javascript
+await __A.mainwin.resize(800, 600);
+```
+
+### restore()
+
+从最大化 / 最小化状态恢复到普通状态
+
+
+```javascript
+await __A.mainwin.restore();
+```
+
+### setOnTop(on_top=true)
+
+设置窗口是否置顶
+
+- 参数：`on_top`（boolean）是否置顶，默认 true
+
+```javascript
+await __A.mainwin.setOnTop(true);
+```
+
+### setTitle(title='')
+
+设置窗口标题
+
+- 参数：`title`（string）新标题
+
+```javascript
+await __A.mainwin.setTitle('我的应用');
+```
+
+### show()
+
+显示主窗口
+
+
+```javascript
+await __A.mainwin.show();
+```
+
+### toggleFullscreen()
+
+切换全屏状态
+
+
+```javascript
+await __A.mainwin.toggleFullscreen();
+```
+
+## notification
+
+桌面通知。
+
+接口覆盖全功能（urgency / icon / sound / actions / timeout），
+当前平台不支持的特性由 getCapabilities() 报告，notify 会降级处理。
+
+设计要点：
+- 接口是契约，后端可替换。未来换 desktop-notifier / win11toast 只改后端。
+- 通知是“尽力而为”的能力。ok=True 表示已提交给系统通知服务，
+  不代表用户一定看到（系统免打扰、权限拒绝等无法感知）。
+- actions 当前所有后端都不支持，notify 会忽略该参数，getCapabilities 报 false。
+- Windows 当前用 NotifyIcon 气泡通知，不是通知中心 Toast
+
+### getCapabilities() -> object
+
+获取当前后端的通知能力
+
+- 返回：`object` {backend(string): 'linux' / 'macos' / 'windows' / ''；urgency(boolean): 是否支持 low/normal/critical；icon(boolean): 是否支持自定义图标；sound(boolean): 是否支持通知声音；actions(boolean): 是否支持动作按钮；timeout(boolean): 是否支持自定义显示时长}
+
+```javascript
+const caps = await __A.notification.getCapabilities();
+if (caps.sound) { /* 可以播放声音 */ }
+```
+
+### isAvailable()
+
+当前环境是否支持桌面通知
+
+
+```javascript
+const ok = await __A.notification.isAvailable();
+```
+
+### notify(title, body='', urgency='normal', icon='', sound=false, actions=null, timeout=null) -> object
+
+发送一条桌面通知，立即返回，不阻塞等待用户交互
+
+- 参数：`title`（string）通知标题，必填；`body`（string，可选）通知正文；`urgency`（string，可选）优先级 low / normal / critical。默认 normal；`icon`（string，可选）图标路径，仅 Linux 支持；`sound`（boolean，可选）是否播放提示音。默认 false；`actions`（array，可选）动作按钮列表。当前后端均不支持，忽略；`timeout`（number，可选）建议显示秒数，仅 Linux 支持
+- 返回：`object` {ok(boolean): 是否已提交给系统通知服务；backend(string): 实际使用的后端；error(string): 错误信息，成功时为空串}
+- 注意：ok=True 表示已提交给系统通知服务，不代表用户一定看到；当前后端不支持的特性会被降级忽略，不导致整体失败；例如 actions 在当前所有后端都不支持，传入也会被忽略；urgency 取值 low / normal / critical，非法值按 normal 处理；icon 为图标路径，仅 Linux 后端支持；其他平台忽略；sound 在 Linux 当前后端不支持，忽略；macOS/Windows 播放默认提示音；timeout 为建议显示秒数，仅 Linux 后端支持
+
+```javascript
+await __A.notification.notify('下载完成', '文件已保存到 Downloads');
+await __A.notification.notify('警告', '磁盘空间不足',
+    'critical', '', true);
+```
+
+## process
+
+进程管理与操作。
+
+提供运行外部程序、查询和控制系统进程的能力
+
+- 注意：涉及进程终止的接口（kill / terminate / suspend）具有破坏性；调用方需自行确认目标进程。所有方法返回统一结构，失败时；返回 ok=False 而非抛异常
+- 危险：通过本模块可以终止任意进程，使用风险自担
+
+### execute(bin_name, params='') -> object
+
+运行指定可执行文件（不等待），返回进程号
+
+- 参数：`bin_name`（string）可执行文件路径或命令名；`params`（string，可选）附加命令行参数，按 shell 规则解析。默认为 ""
+- 返回：`object` {ok(boolean): 是否成功；pid(number | null): 进程号；msg(string): 结果描述}
+- 注意：bin_name 为命令名（而非绝对路径）时需在 PATH 中；cmd 内置命令（如 dir、echo）需自行经 `cmd /c` 调用；params 按 POSIX shell 规则解析，Windows 路径含空格需自行加引号
+
+```javascript
+const res = await __A.process.execute('notepad.exe');
+if (res.ok) console.log('pid:', res.pid);
+```
+
+### executeWait(bin_name, params='') -> object
+
+运行指定可执行文件并等待其结束，返回执行结果
+
+- 参数：`bin_name`（string）可执行文件路径或命令名；`params`（string，可选）附加命令行参数，按 shell 规则解析。默认为 ""
+- 返回：`object` {ok(boolean): 是否成功执行（不代表退出码为 0）；retcode(number | null): 进程返回码；stdout(string): 标准输出；stderr(string): 标准错误；msg(string): 结果描述}
+- 注意：bin_name 为命令名（而非绝对路径）时需在 PATH 中；cmd 内置命令（如 dir、echo）需自行经 `cmd /c` 调用；params 按 POSIX shell 规则解析，Windows 路径含空格需自行加引号
+
+```javascript
+const res = await __A.process.executeWait('python', '--version');
+console.log(res.retcode, res.stdout, res.stderr);
+```
+
+### exists(pid) -> boolean
+
+检查指定进程是否存在
+
+- 参数：`pid`（number）进程号
+- 返回：`boolean` 进程是否存在
+
+```javascript
+const alive = await __A.process.exists(1234);
+```
+
+### getInformation(pid) -> object
+
+获取指定进程的详细信息
+
+- 参数：`pid`（number）进程号
+- 返回：`object` {ok(boolean): 是否成功；info(object | null): 进程信息字典（psutil 的 as_dict 结果）；msg(string): 结果描述}
+- 注意：info 为 psutil.Process.as_dict() 的结果，字段名见 psutil 文档，跨版本可能变化
+
+```javascript
+const res = await __A.process.getInformation(1234);
+if (res.ok) console.log(res.info.name, res.info.cpu_percent);
+```
+
+### kill(pid) -> object
+
+强制终止指定进程
+
+- 参数：`pid`（number）进程号
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述}
+- 注意：UNIX 下发送 SIGKILL；Windows 下使用 TerminateProcess
+- 危险：进程会被立即终止，不给机会保存数据
+
+```javascript
+const res = await __A.process.kill(1234);
+```
+
+### list() -> array
+
+获取当前所有进程的 PID 列表
+
+- 返回：`array` 进程号列表
+
+```javascript
+const pids = await __A.process.list();
+```
+
+### resume(pid) -> object
+
+恢复指定进程
+
+- 参数：`pid`（number）进程号
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述}
+- 注意：UNIX 下发送 SIGCONT；Windows 下恢复所有线程
+
+```javascript
+const res = await __A.process.resume(1234);
+```
+
+### sendSignal(pid, signal) -> object
+
+向指定进程发送信号
+
+- 参数：`pid`（number）进程号；`signal`（number）信号值（见 signal 模块常量）
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述}
+- 注意：UNIX 下等价于 os.kill(pid, sig)；Windows 下仅支持 SIGTERM、CTRL_C_EVENT、CTRL_BREAK_EVENT；其中 SIGTERM 被当作 kill() 的别名
+
+```javascript
+const res = await __A.process.sendSignal(1234, 15);  // SIGTERM
+```
+
+### suspend(pid) -> object
+
+挂起指定进程
+
+- 参数：`pid`（number）进程号
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述}
+- 注意：UNIX 下发送 SIGSTOP；Windows 下挂起所有线程
+
+```javascript
+const res = await __A.process.suspend(1234);
+```
+
+### terminate(pid) -> object
+
+终止指定进程
+
+- 参数：`pid`（number）进程号
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述}
+- 注意：UNIX 下发送 SIGTERM；Windows 下等价于 kill()
+
+```javascript
+const res = await __A.process.terminate(1234);
+```
+
+## python
+
+Python 支持
+
+向前端 JS 提供执行 Python 源码/文件的能力。
+
+约束与限制：
+- 脚本之间环境相互隔离，每次执行新建命名空间；
+- 不向脚本注入宿主对象，脚本无法访问应用本体；
+- 脚本可自由 import 任意已安装的 PyPI 包；
+- 通过约定 __result__ 向 JS 回传结果。
+
+返回结构（所有方法统一）：
+```
+{'ok': True,  'result': <__result__>, 'error': '', 'traceback': '', 'stdout': '...'}
+{'ok': False, 'result': None, 'error': '...', 'traceback': '...', 'stdout': '...'}
+```
+
+- 注意：__result__ 会经过 Python → JavaScript 转换，仅支持部分类型：；|   Python   | JavaScript     |；|:------:|:-------|；| bool | boolean |；| int / float | number |；| str | string |；| list / tuple | Array |；| dict | Object |
+- 危险：通过本模块可以获得 python 的强大能力，使用风险自担
+
+### exec(pysrc) -> dict[str, any]
+
+执行一段 Python 源码，返回结构化结果
+
+- 参数：`pysrc`（string）python 源代码
+- 返回：`dict[str, any]` 参见上面的 __返回结构__
+
+```javascript
+await __A.python.exec("__result__ = 12345");
+```
+
+### execFile(py_filepath) -> dict[str, any]
+
+执行指定的 python 文件
+
+- 参数：`py_filepath`（string）python 文件完整路径
+- 返回：`dict[str, any]` 参见上面的 __返回结构__
+
+```javascript
+await __A.python.execFile("plugins/hello.py");
+```
+
+## runtime
+
+运行时信息与控制。
+
+提供当前应用运行时的控制、动态资源信息和系统查询。
+
+平台判断等静态信息请用 window.ayiyoyoyo：
+    window.ayiyoyoyo.osType       'windows' / 'linux' / 'macos' / 'other'
+    window.ayiyoyoyo.osArch       'x86_64' / 'arm64' / 'x86' / 其他
+    window.ayiyoyoyo.appVersion   基座版本
+    window.ayiyoyoyo.pythonVersion Python 版本
+    window.ayiyoyoyo.pid          当前进程 PID
+
+本模块只提供运行时控制、动态资源信息和系统查询。
+所有返回 psutil 对象的方法均由 @jsonify 序列化
+
+### exit(retcode=0)
+
+退出当前应用
+
+- 参数：`retcode`（number，可选）进程退出码，默认为 0
+
+```javascript
+await __A.runtime.exit();
+await __A.runtime.exit(1);
+```
+
+### getBootTime()
+
+获取系统启动时间戳（Unix 时间）
+
+
+```javascript
+const ts = await __A.runtime.getBootTime();
+```
+
+### getCpuCount(logical=true) -> number | null
+
+获取 CPU 核心数
+
+- 参数：`logical`（boolean，可选）true 返回逻辑核心数，false 返回物理核心数。默认 true
+- 返回：`number | null` 核心数；拿不到时为 null
+
+```javascript
+const n = await __A.runtime.getCpuCount();
+const physical = await __A.runtime.getCpuCount(false);
+```
+
+### getCpuFreq(percpu=false)
+
+获取 CPU 频率
+
+- 参数：`percpu`（boolean，可选）true 返回每个核心，false 返回总计。默认 false
+
+```javascript
+const f = await __A.runtime.getCpuFreq();
+```
+
+### getCpuPercent(percpu=false) -> number | array
+
+获取 CPU 使用率百分比（瞬时，非阻塞）
+
+- 参数：`percpu`（boolean，可选）true 返回每个核心的列表，false 返回总使用率。默认 false
+- 返回：`number | array` 使用率百分比
+
+```javascript
+const p = await __A.runtime.getCpuPercent();
+const per = await __A.runtime.getCpuPercent(true);
+```
+
+### getCpuStats()
+
+获取 CPU 统计信息（上下文切换、中断等）
+
+
+```javascript
+const s = await __A.runtime.getCpuStats();
+```
+
+### getCpuTimes(percpu=false)
+
+获取 CPU 时间统计
+
+- 参数：`percpu`（boolean，可选）true 返回每个核心，false 返回总计。默认 false
+
+```javascript
+const t = await __A.runtime.getCpuTimes();
+```
+
+### getCpuTimesPercent(percpu=false)
+
+获取 CPU 时间占比统计（瞬时）
+
+- 参数：`percpu`（boolean，可选）true 返回每个核心，false 返回总计。默认 false
+
+```javascript
+const t = await __A.runtime.getCpuTimesPercent();
+```
+
+### getDiskIoCounters(perDisk=false, nowrap=true)
+
+获取磁盘 IO 统计
+
+- 参数：`perDisk`（boolean，可选）true 返回每个磁盘，false 返回总计。默认 false；`nowrap`（boolean，可选）是否把计数器字段包装成 namedtuple。默认 true
+
+```javascript
+const io = await __A.runtime.getDiskIoCounters();
+```
+
+### getDiskPartitions(allDisk=false)
+
+获取磁盘分区列表
+
+- 参数：`allDisk`（boolean，可选）true 包含伪文件系统（tmpfs 等），false 只含物理磁盘。默认 false
+
+```javascript
+const parts = await __A.runtime.getDiskPartitions();
+```
+
+### getDiskUsage(path=null)
+
+获取指定路径所在磁盘的使用情况
+
+- 参数：`path`（string，可选）路径。为 null 时用基座数据目录
+
+```javascript
+const u = await __A.runtime.getDiskUsage();
+const u2 = await __A.runtime.getDiskUsage('/home');
+```
+
+### getLoadAvg() -> array
+
+获取系统平均负载（1/5/15 分钟）
+
+- 返回：`array` (1min, 5min, 15min)；部分平台不支持时返回 null
+
+```javascript
+const [a, b, c] = await __A.runtime.getLoadAvg();
+```
+
+### getNetConnections(kind='inet')
+
+获取当前网络连接
+
+- 参数：`kind`（string，可选）'inet' / 'inet4' / 'inet6' / 'tcp' / 'udp' / 'all' 等。默认 'inet'
+
+```javascript
+const conns = await __A.runtime.getNetConnections();
+```
+
+### getNetIfAddrs()
+
+获取网卡地址列表
+
+
+```javascript
+const addrs = await __A.runtime.getNetIfAddrs();
+```
+
+### getNetIfStats()
+
+获取网卡状态（是否 up、速率等）
+
+
+```javascript
+const stats = await __A.runtime.getNetIfStats();
+```
+
+### getNetIoCounters(perNic=false, nowrap=true)
+
+获取网络 IO 统计
+
+- 参数：`perNic`（boolean，可选）true 返回每个网卡，false 返回总计。默认 false；`nowrap`（boolean，可选）是否把计数器字段包装成 namedtuple。默认 true
+
+```javascript
+const io = await __A.runtime.getNetIoCounters();
+```
+
+### getSensorsBattery()
+
+获取电池信息。无电池或平台不支持时返回空 dict
+
+
+```javascript
+const b = await __A.runtime.getSensorsBattery();
+if (b.percent !== undefined) console.log(b.percent);
+```
+
+### getSensorsFans()
+
+获取风扇转速。平台/硬件不支持时返回空 dict
+
+
+```javascript
+const fans = await __A.runtime.getSensorsFans();
+```
+
+### getSensorsTemperatures(fahrenheit=false)
+
+获取温度传感器数据。平台/硬件不支持时返回空 dict
+
+- 参数：`fahrenheit`（boolean，可选）true 返回华氏度。默认 false
+
+```javascript
+const temps = await __A.runtime.getSensorsTemperatures();
+```
+
+### getSwapMemory()
+
+获取交换分区信息
+
+
+```javascript
+const s = await __A.runtime.getSwapMemory();
+```
+
+### getUsers()
+
+获取当前登录用户列表
+
+
+```javascript
+const users = await __A.runtime.getUsers();
+```
+
+### getVirtualMemory()
+
+获取虚拟内存信息
+
+
+```javascript
+const m = await __A.runtime.getVirtualMemory();
+console.log(m.percent);
+```
+
+### noop()
+
+空操作。
+
+不执行任何逻辑，直接返回。主要用途：
+
+- 验证 jsapi 是否正确注册、bridge 是否连通。
+- 作为最小调用的，测量一次 bridge 往返的耗时
+
+
+```javascript
+await __A.runtime.noop();
+```
+
+## shell
+
+系统 Shell 交互
+
+### open(target) -> boolean
+
+用系统默认方式打开路径或 URL。
+
+根据目标类型，交给操作系统的默认处理方式：
+- 目录：在文件管理器中打开
+- 文件：用注册的默认程序打开
+- URL：用默认浏览器打开
+
+- 参数：`target`（string）本地路径或 URL
+- 返回：`boolean` 成功发起打开动作返回 true，其他返回 false
+
+```javascript
+await __A.shell.open('C:/myapp');              // 打开目录
+await __A.shell.open('C:/doc.pdf');            // 打开文件
+await __A.shell.open('https://example.com');   // 打开网页
+```
+
+## sqlite3
+
+SQLite 数据库操作。
+
+提供对 SQLite 数据库的连接、查询、执行、事务控制等能力。
+
+连接以整数 ID 标识，前端保存这个 ID 即可在后续调用中使用。
+所有方法返回结构化结果，失败时通过 ok 字段区分，不抛异常
+
+- 注意：遵循 SQL 标准事务模型：execute 默认不提交，需要显式调用 commit；才会落盘。如果希望单条 SQL 执行后立即提交，可传 auto_commit=True
+
+### begin(conn_id) -> object
+
+显式开始事务
+
+- 参数：`conn_id`（number）连接 ID
+- 返回：`object` 操作结果
+- 注意：SQLite 在默认模式下会自动开启事务，通常不需要手动调用；此方法用于明确表达事务边界
+
+```javascript
+await __A.sqlite3.begin(connId);
+```
+
+### close(conn_id) -> object
+
+关闭指定连接
+
+- 参数：`conn_id`（number）连接 ID
+- 返回：`object` {ok(boolean): 是否成功；msg(string): 结果描述}
+
+```javascript
+await __A.sqlite3.close(connId);
+```
+
+### closeAll() -> object
+
+关闭所有连接
+
+- 返回：`object` {ok(boolean): 是否全部成功；msg(string): 结果描述}
+
+```javascript
+await __A.sqlite3.closeAll();
+```
+
+### commit(conn_id) -> object
+
+提交事务
+
+- 参数：`conn_id`（number）连接 ID
+- 返回：`object` 操作结果
+- 注意：提交的是「所有未提交的操作」，不是单条 SQL
+
+```javascript
+await __A.sqlite3.commit(connId);
+```
+
+### connect(database, timeout=5.0, uri=false) -> object
+
+打开一个 SQLite 数据库连接
+
+- 参数：`database`（string）数据库文件路径，或 ':memory:'；`timeout`（number，可选）锁等待超时（秒）。默认 5.0；`uri`（boolean，可选）是否按 URI 解析 database。默认 false
+- 返回：`object` {ok(boolean): 是否成功；connId(number | null): 连接 ID，后续调用使用；msg(string): 结果描述}
+
+```javascript
+const res = await __A.sqlite3.connect('C:/data/my.db');
+if (res.ok) console.log(res.connId);
+```
+
+### execute(conn_id, sql, params=null, auto_commit=false) -> object
+
+执行非查询 SQL（INSERT / UPDATE / DELETE / DDL）
+
+- 参数：`conn_id`（number）连接 ID；`sql`（string）SQL 语句；`params`（array，可选）参数列表，用于参数化查询；`auto_commit`（boolean，可选）是否自动提交。默认 false
+- 返回：`object` {ok(boolean): 是否成功；rowcount(number | null): 受影响行数；lastrowid(number | null): 最后插入的自增 ID；msg(string): 结果描述}
+- 注意：默认不自动提交。执行后需要调用 commit 才会落盘；如果希望执行后立即提交，传 auto_commit=True
+
+```javascript
+// 默认：执行后未提交，需要手动 commit
+await __A.sqlite3.execute(connId, 'INSERT INTO users (name) VALUES (?)', ['Tom']);
+await __A.sqlite3.commit(connId);
+
+// 显式要求立即提交
+await __A.sqlite3.execute(connId, 'INSERT INTO users (name) VALUES (?)', ['Tom'], true);
+```
+
+### executeMany(conn_id, sql, params_list, auto_commit=false) -> object
+
+批量执行同一条 SQL
+
+- 参数：`conn_id`（number）连接 ID；`sql`（string）SQL 语句；`params_list`（array）参数列表的列表；`auto_commit`（boolean，可选）是否自动提交。默认 false
+- 返回：`object` {ok(boolean): 是否成功；rowcount(number | null): 受影响行数；msg(string): 结果描述}
+- 注意：默认不自动提交。执行后需要调用 commit 才会落盘
+
+```javascript
+await __A.sqlite3.executeMany(connId,
+    'INSERT INTO users (name) VALUES (?)',
+    [['Tom'], ['Jerry']]);
+await __A.sqlite3.commit(connId);
+```
+
+### getTableList(conn_id) -> object
+
+获取数据库中所有表名
+
+- 参数：`conn_id`（number）连接 ID
+- 返回：`object` {ok(boolean): 是否成功；tables(array | null): 表名列表；msg(string): 结果描述}
+
+```javascript
+const res = await __A.sqlite3.getTableList(connId);
+console.log(res.tables);
+```
+
+### isConnected(conn_id) -> boolean
+
+检查指定连接是否存在
+
+- 参数：`conn_id`（number）连接 ID
+- 返回：`boolean` 连接是否存在
+
+```javascript
+const ok = await __A.sqlite3.isConnected(connId);
+```
+
+### queryDicts(conn_id, sql, params=null) -> object
+
+执行 SELECT 查询，返回所有结果行（对象形式）。
+
+每行是一个字典，键为列名
+
+- 参数：`conn_id`（number）连接 ID；`sql`（string）SELECT 语句；`params`（array，可选）参数列表，用于参数化查询
+- 返回：`object` {ok(boolean): 是否成功；rows(array | null): 结果行，每行是一个字典；msg(string): 结果描述}
+
+```javascript
+const res = await __A.sqlite3.queryDicts(connId, 'SELECT * FROM users');
+// res.rows = [{id: 1, name: 'Tom'}, {id: 2, name: 'Jerry'}]
+```
+
+### queryOne(conn_id, sql, params=null) -> object
+
+执行 SELECT 查询，返回第一行
+
+- 参数：`conn_id`（number）连接 ID；`sql`（string）SELECT 语句；`params`（array，可选）参数列表，用于参数化查询
+- 返回：`object` {ok(boolean): 是否成功；row(object | null): 第一行数据，无结果时为 null；msg(string): 结果描述}
+
+```javascript
+const res = await __A.sqlite3.queryOne(connId, 'SELECT * FROM users WHERE id = ?', [1]);
+if (res.ok && res.row) console.log(res.row.name);
+```
+
+### queryRows(conn_id, sql, params=null) -> object
+
+执行 SELECT 查询，返回所有结果行（列表形式）。
+
+每行是一个值列表，配合 columns 使用
+
+- 参数：`conn_id`（number）连接 ID；`sql`（string）SELECT 语句；`params`（array，可选）参数列表，用于参数化查询
+- 返回：`object` {ok(boolean): 是否成功；columns(array | null): 列名列表；rows(array | null): 结果行，每行是一个值列表；msg(string): 结果描述}
+
+```javascript
+const res = await __A.sqlite3.queryRows(connId, 'SELECT id, name FROM users');
+// res.columns = ['id', 'name']
+// res.rows    = [[1, 'Tom'], [2, 'Jerry']]
+```
+
+### rollback(conn_id) -> object
+
+回滚事务
+
+- 参数：`conn_id`（number）连接 ID
+- 返回：`object` 操作结果
+- 注意：回滚的是「所有未提交的操作」
+
+```javascript
+await __A.sqlite3.rollback(connId);
+```
+
+## storage
+
+小应用级 key-value 存储。
+
+本模块目的为快速平替 localStorage，实现简单的 KV 存储。
+
+- 本模块接口与 localStorage 一一对应，但为异步调用；
+- 不提供 storage 事件，多窗口并发写以最后写入者为准；
+- 数据存放于 appdata/data/<appchip_id>/_storage.json
+
+### clear()
+
+清空全部键值对，立即写入磁盘
+
+
+```javascript
+await __A.storage.clear();
+```
+
+### getItem(key) -> string | null
+
+读取指定键的值
+
+- 参数：`key`（string）键
+- 返回：`string | null` 值；键不存在返回 null
+
+```javascript
+const v = await __A.storage.getItem('theme');
+```
+
+### key(index) -> string | null
+
+按插入顺序返回指定索引的键
+
+- 参数：`index`（number）索引，从 0 开始
+- 返回：`string | null` 键；越界返回 null
+
+```javascript
+const k = await __A.storage.key(0);
+```
+
+### length() -> number
+
+获取键的数量
+
+- 返回：`number` 键的数量
+- 注意：localStorage 的 length 是属性，这里由于 jsapi 为异步调用，做成方法
+
+```javascript
+const n = await __A.storage.length();
+```
+
+### removeItem(key)
+
+删除指定键，立即写入磁盘
+
+- 参数：`key`（string）键
+- 注意：键不存在视为成功
+
+```javascript
+await __A.storage.removeItem('theme');
+```
+
+### setItem(key, value)
+
+设置键值对，立即写入磁盘
+
+- 参数：`key`（string）键；`value`（any）值，任意类型，按 str() 转换
+- 注意：value 会被 str() 转成字符串存储。存结构请先 JSON.stringify
+
+```javascript
+await __A.storage.setItem('theme', 'dark');
+await __A.storage.setItem('count', 42);       // 存为 '42'
+await __A.storage.setItem('user', JSON.stringify({name: '张三'}));
+```
