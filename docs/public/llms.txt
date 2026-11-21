@@ -1867,15 +1867,21 @@ setInterval(async () => {
 await __A.tray.remove();
 ```
 
-### setIcon(iconBase64) -> object
+### setIcon(icon) -> object
 
-更换当前小应用的托盘图标
+设置托盘图标，或让图标在几张图之间闪烁
 
-- 参数：`iconBase64`（string）base64 编码的 PNG，兼容 data URL 前缀
+- 参数：`icon`（string | object）base64 图片，或 {icons, interval} 对象
 - 返回：`object` {ok, error}
+- 注意：传字符串：静态图标，同时停止正在进行的闪烁；传对象 `{icons: [图1, 图2], interval: 500}`：基座在后台线程里轮流切换这些图；用于「收到消息时换成对方头像并闪烁」，用户处理完再传一次静态图标即可恢复；闪烁跑在基座侧，窗口隐藏到托盘后依然有效（前端定时器会被节流）；图像统一缩放为 32×32，支持 PNG/JPEG 等 PIL 能打开的格式，允许带；`data:image/png;base64,` 前缀；`icons` 需要 2~8 张；`interval` 100~5000 毫秒，默认 500
 
 ```javascript
-await __A.tray.setIcon('data:image/png;base64,...');
+// 静态图标
+await __A.tray.setIcon(myIconB64);
+
+// 收到消息：换成对方头像并闪烁，用户读完后恢复
+await __A.tray.setIcon({ icons: [avatarB64, normalB64], interval: 500 });
+await __A.tray.setIcon(normalB64);
 ```
 
 ### updateMenu(items) -> object
