@@ -316,6 +316,10 @@ export default defineConfig({
                                 text: 'sqlite3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sqlite3 数据库',
                                 link: '/zh/jsapi/JsapiSqlite3'
                             },
+                            {
+                                text: 'tray&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系统托盘',
+                                link: '/zh/jsapi/JsapiTray'
+                            },
                         ],
                     },
                 ],

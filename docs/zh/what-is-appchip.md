@@ -51,6 +51,7 @@ layout: doc
 | `win_on_top`                        | bool   | false            | 窗口置顶                   |
 | `win_resizable`                     | bool   | true             | 窗口可调整大小             |
 | `win_fullscreen`                    | bool   | false            | 全屏启动                   |
+| `win_close_to_tray`                 | bool   | false            | 关闭窗口时隐藏到托盘，不退出程序（需 `__A.tray` 可用） |
 | `wv_open_external_links_in_browser` | bool   | true             | 用浏览器打开外部链接       |
 | `wv_allow_downloads`                | bool   | true             | 允许下载                   |
 | `wv_allow_file_urls`                | bool   | true             | 允许文件链接               |
