@@ -1799,8 +1799,12 @@ await __A.storage.setItem('user', JSON.stringify({name: '张三'}));
 当前仅 Windows 后端可用；其他平台 isAvailable 返回 False，各方法返回
 “不支持”。接口按全功能固定，后端可替换。
 
-事件回传通过 pollEvents 轮询（建议 500ms）。
-菜单点击事件结构：{type: 'menu_click', itemId, timestamp(毫秒)}
+事件回传有三种方式，优先级从高到低：
+1. 菜单项写 `action: 'show'|'hide'|'quit'|'reload'` —— 基座直接在 Python 侧执行，
+   0 延迟，页面出问题也能用；
+2. 菜单项写 `onClick: function` —— 点击时基座立刻推回页面执行，不走轮询；
+3. 都不写 —— 点击事件进队列，由前端 pollEvents 轮询取
+   （{type: 'menu_click', itemId, timestamp(毫秒)}）
 
 ### create(options) -> object
 
@@ -1808,12 +1812,16 @@ await __A.storage.setItem('user', JSON.stringify({name: '张三'}));
 
 - 参数：`options`（object）{iconBase64?, title?, menu?}
 - 返回：`object` {ok, error}
-- 注意：options.iconBase64 可选：base64 编码的 PNG（兼容 data URL 前缀）；建议 32×32；缺省时尝试使用小应用自身的图标；options.menu 是菜单项数组，schema 见 updateMenu；菜单里没有 default 项时，基座会自动补一个「显示主窗口」
+- 注意：options.iconBase64 可选：base64 编码的图片（兼容 data URL 前缀）；统一缩放到 32×32；缺省时尝试使用小应用自身的图标；options.menu 是菜单项数组，schema 见 updateMenu；菜单里没有 default 项时，基座会自动补一个「显示主窗口」
 
 ```javascript
 await __A.tray.create({
     title: '我的应用',
-    menu: [{id: 'show', label: '显示窗口'}, {id: 'quit', label: '退出'}],
+    menu: [
+        {label: '显示主窗口', action: 'show', default: true},
+        {label: '打开设置', onClick: () => showSettings()},
+        {label: '退出', action: 'quit'},
+    ],
 });
 ```
 
@@ -1821,8 +1829,8 @@ await __A.tray.create({
 
 获取当前后端的托盘能力
 
-- 返回：`object` {tray, menu, icon, click, backend}
-- 注意：click 表示“左键单击会触发菜单默认项”，没有独立的双击事件；Windows 上双击的第一下同样会触发默认项
+- 返回：`object` {tray, menu, icon, click, action, callback, backend}
+- 注意：click 表示“左键单击会触发菜单默认项”，没有独立的双击事件；Windows 上双击的第一下同样会触发默认项；action 表示菜单项可用内置动作（show/hide/quit/reload）；callback 表示菜单项可以直接写 onClick 函数（点击由基座推回页面，不走轮询）
 
 ```javascript
 const caps = await __A.tray.getCapabilities();
@@ -1886,16 +1894,28 @@ await __A.tray.setIcon(normalB64);
 
 ### updateMenu(items) -> object
 
-更新当前小应用的托盘菜单
+更新当前小应用的托盘菜单。
+
+点击后的响应方式（优先级从高到低）：
+1. `action`：内置动作，Python 侧直接执行，0 延迟，页面出问题也能用。
+   可选 'show' | 'hide' | 'quit' | 'reload'。
+2. `onClick`：写一个函数，点击时由基座立刻推回页面执行（不走轮询）。
+   页面刷新后回调会自动失效并退回事件队列。
+3. 都不写：点击结果进 pollEvents 队列，由前端轮询取。
+checkbox 的 checked 在重建菜单时生效，点击本身不会自动切换
 
 - 参数：`items`（array）菜单项数组
 - 返回：`object` {ok, error}
-- 注意：菜单项 schema：；{id, label, enabled=True, checked=False, default=False；type: 'normal'|'checkbox'|'separator', submenu: []}；checkbox 的 checked 在重建菜单时生效，点击本身不会自动切换
+- 注意：菜单项 schema：；{id, label, enabled=True, checked=False, default=False；type: 'normal'|'checkbox'|'separator', submenu: [], action, onClick}
 
 ```javascript
 await __A.tray.updateMenu([
-    {id: 'show', label: '显示窗口'},
+    {label: '显示主窗口', action: 'show', default: true},
     {type: 'separator'},
-    {id: 'quit', label: '退出'},
+    {label: '打开设置', onClick: () => showSettings()},
+    {label: '退出', action: 'quit'},
 ]);
+
+// 也可以完全不用上面两种，走轮询：
+await __A.tray.updateMenu([{id: 'about', label: '关于'}]);
 ```
