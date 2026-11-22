@@ -2,13 +2,13 @@
 layout: doc
 ---
 
-# ayiyoyoyo.api.fs <Badge type="tip" text="Since 25.5.1.1" />
+# ayiyoyoyo.api.fs <Badge type="tip" text="Since 26.11.11.1" />
 
 文件系统操作。
 
 提供读写文本、二进制、目录操作等能力，以当前用户权限运行。
 
-## basename(path) <Badge type="tip" text="Since 25.5.1.1" /> {#basename}
+## basename(path) <Badge type="tip" text="Since 26.11.11.1" /> {#basename}
 
 获取路径的文件名部分。
 
@@ -28,7 +28,7 @@ layout: doc
 const name = await __A.fs.basename('C:/a/b.txt');  // name === 'b.txt'
 ```
 
-## copy(src, dst, overwrite) <Badge type="tip" text="Since 25.5.1.1" /> {#copy}
+## copy(src, dst, overwrite) <Badge type="tip" text="Since 26.11.11.1" /> {#copy}
 
 复制文件或目录。
 
@@ -56,7 +56,7 @@ await __A.fs.copy('C:/a.txt', 'C:/a.bak');
 await __A.fs.copy('C:/dir', 'C:/dir2', true);
 ```
 
-## dirname(path) <Badge type="tip" text="Since 25.5.1.1" /> {#dirname}
+## dirname(path) <Badge type="tip" text="Since 26.11.11.1" /> {#dirname}
 
 获取路径的父目录部分。
 
@@ -76,7 +76,7 @@ await __A.fs.copy('C:/dir', 'C:/dir2', true);
 const dir = await __A.fs.dirname('C:/a/b.txt');  // dir === 'C:/a'
 ```
 
-## exists(path) <Badge type="tip" text="Since 25.5.1.1" /> {#exists}
+## exists(path) <Badge type="tip" text="Since 26.11.11.1" /> {#exists}
 
 判断路径是否存在。
 
@@ -97,7 +97,7 @@ const ok = await __A.fs.exists('C:/a.txt');
 if (ok) console.log('存在');
 ```
 
-## isDir(path) <Badge type="tip" text="Since 25.5.1.1" /> {#isDir}
+## isDir(path) <Badge type="tip" text="Since 26.11.11.1" /> {#isDir}
 
 判断路径是否为目录。
 
@@ -118,7 +118,7 @@ const ok = await __A.fs.isDir('C:/dir');
 if (ok) console.log('是目录');
 ```
 
-## isFile(path) <Badge type="tip" text="Since 25.5.1.1" /> {#isFile}
+## isFile(path) <Badge type="tip" text="Since 26.11.11.1" /> {#isFile}
 
 判断路径是否为文件。
 
@@ -139,7 +139,7 @@ const ok = await __A.fs.isFile('C:/a.txt');
 if (ok) console.log('是文件');
 ```
 
-## join(parts) <Badge type="tip" text="Since 25.5.1.1" /> {#join}
+## join(parts) <Badge type="tip" text="Since 26.11.11.1" /> {#join}
 
 拼接路径。
 
@@ -157,7 +157,7 @@ const p = await __A.fs.join('C:/a', 'b', 'c.txt');
 // p === 'C:/a/b/c.txt'（Windows 下为 C:\a\b\c.txt）
 ```
 
-## listDir(path) <Badge type="tip" text="Since 25.5.1.1" /> {#listDir}
+## listDir(path) <Badge type="tip" text="Since 26.11.11.1" /> {#listDir}
 
 列出目录内容（不递归）。
 
@@ -184,7 +184,7 @@ const res = await __A.fs.listDir('C:/dir');
 if (res.ok) for (const e of res.entries) console.log(e.name, e.is_dir);
 ```
 
-## mkdirs(path) <Badge type="tip" text="Since 25.5.1.1" /> {#mkdirs}
+## mkdirs(path) <Badge type="tip" text="Since 26.11.11.1" /> {#mkdirs}
 
 递归创建目录（含所有需要的父目录）。
 
@@ -208,7 +208,7 @@ if (res.ok) for (const e of res.entries) console.log(e.name, e.is_dir);
 await __A.fs.mkdirs('C:/a/b/c');
 ```
 
-## readBase64(path) <Badge type="tip" text="Since 25.5.1.1" /> {#readBase64}
+## readBase64(path) <Badge type="tip" text="Since 26.11.11.1" /> {#readBase64}
 
 读取二进制文件并返回 base64。
 
@@ -230,7 +230,7 @@ const res = await __A.fs.readBase64('C:/a.png');
 if (res.ok) img.src = 'data:image/png;base64,' + res.base64;
 ```
 
-## readText(path, encoding) <Badge type="tip" text="Since 25.5.1.1" /> {#readText}
+## readText(path, encoding) <Badge type="tip" text="Since 26.11.11.1" /> {#readText}
 
 读取文本文件。
 
@@ -252,7 +252,7 @@ const res = await __A.fs.readText('C:/a.txt');
 if (res.ok) console.log(res.text);
 ```
 
-## remove(path) <Badge type="tip" text="Since 25.5.1.1" /> {#remove}
+## remove(path) <Badge type="tip" text="Since 26.11.11.1" /> {#remove}
 
 删除文件或空目录。
 
@@ -276,7 +276,7 @@ if (res.ok) console.log(res.text);
 await __A.fs.remove('C:/a.txt');
 ```
 
-## rename(src, dst) <Badge type="tip" text="Since 25.5.1.1" /> {#rename}
+## rename(src, dst) <Badge type="tip" text="Since 26.11.11.1" /> {#rename}
 
 重命名或移动文件/目录。
 
@@ -300,7 +300,7 @@ await __A.fs.remove('C:/a.txt');
 await __A.fs.rename('C:/a.txt', 'C:/b.txt');
 ```
 
-## rmtree(path) <Badge type="tip" text="Since 25.5.1.1" /> {#rmtree}
+## rmtree(path) <Badge type="tip" text="Since 26.11.11.1" /> {#rmtree}
 
 递归删除目录及其内容。
 
@@ -323,7 +323,7 @@ await __A.fs.rename('C:/a.txt', 'C:/b.txt');
 await __A.fs.rmtree('C:/dir');
 ```
 
-## stat(path) <Badge type="tip" text="Since 25.5.1.1" /> {#stat}
+## stat(path) <Badge type="tip" text="Since 26.11.11.1" /> {#stat}
 
 获取路径的元信息。
 
@@ -344,7 +344,7 @@ const res = await __A.fs.stat('C:/a.txt');
 if (res.ok) console.log(res.info.size);
 ```
 
-## writeBase64(path, b64, mkdir) <Badge type="tip" text="Since 25.5.1.1" /> {#writeBase64}
+## writeBase64(path, b64, mkdir) <Badge type="tip" text="Since 26.11.11.1" /> {#writeBase64}
 
 将 base64 写入二进制文件（原子写）。
 
@@ -371,7 +371,7 @@ if (res.ok) console.log(res.info.size);
 await __A.fs.writeBase64('C:/a.png', base64Str);
 ```
 
-## writeText(path, text, encoding, mkdir) <Badge type="tip" text="Since 25.5.1.1" /> {#writeText}
+## writeText(path, text, encoding, mkdir) <Badge type="tip" text="Since 26.11.11.1" /> {#writeText}
 
 写入文本文件（原子写：临时文件 + 替换）。
 

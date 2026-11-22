@@ -2,7 +2,7 @@
 layout: doc
 ---
 
-# ayiyoyoyo.api.runtime <Badge type="tip" text="Since 25.5.1.1" />
+# ayiyoyoyo.api.runtime <Badge type="tip" text="Since 26.11.11.1" />
 
 运行时信息与控制。
 
@@ -18,7 +18,7 @@ layout: doc
 本模块只提供运行时控制、动态资源信息和系统查询。
 所有返回 psutil 对象的方法均由 @jsonify 序列化。
 
-## exit(retcode) <Badge type="tip" text="Since 25.5.1.1" /> {#exit}
+## exit(retcode) <Badge type="tip" text="Since 26.11.11.1" /> {#exit}
 
 退出当前应用。
 
@@ -262,7 +262,7 @@ const m = await __A.runtime.getVirtualMemory();
 console.log(m.percent);
 ```
 
-## noop() <Badge type="tip" text="Since 25.5.1.1" /> {#noop}
+## noop() <Badge type="tip" text="Since 26.11.11.1" /> {#noop}
 
 空操作。
 
