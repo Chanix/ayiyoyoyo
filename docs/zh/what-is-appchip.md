@@ -34,35 +34,35 @@ layout: doc
 
 字段说明：
 
-| 字段                                | 类型   | 默认值           | 说明                                                   | 版本       |
-|-------------------------------------|--------|------------------|--------------------------------------------------------|------------|
-| `id`                                | string |                  | 小应用唯一标识                                         | 26.11.11.1 |
-| `name`                              | string | $id              | 小应用名称                                             | 26.11.11.1 |
-| `version`                           | string | "0.0.0.1"        | 版本号                                                 | 26.11.11.1 |
-| `description`                       | string | ""               | 小应用描述                                             | 26.11.11.1 |
-| `author`                            | string | ""               | 作者                                                   | 26.11.11.1 |
-| `url`                               | string | "/"              | 入口地址                                               | 26.11.11.1 |
-| `html`                              | string | null             | HTML 代码，优先于 `url`                                | 26.11.11.1 |
-| `win_title`                         | string | "$name $version" | 窗口标题                                               | 26.11.11.1 |
-| `win_width`                         | number | 800              | 窗口宽度                                               | 26.11.11.1 |
-| `win_height`                        | number | 600              | 窗口高度                                               | 26.11.11.1 |
-| `win_hidden`                        | bool   | false            | 启动时隐藏窗口                                         | 26.11.11.1 |
-| `win_confirm_close`                 | bool   | false            | 关闭时弹确认框                                         | 26.11.11.1 |
-| `win_on_top`                        | bool   | false            | 窗口置顶                                               | 26.11.11.1 |
-| `win_resizable`                     | bool   | true             | 窗口可调整大小                                         | 26.11.11.1 |
-| `win_fullscreen`                    | bool   | false            | 全屏启动                                               | 26.11.11.1 |
-| `win_close_to_tray`                 | bool   | false            | 关闭窗口时隐藏到托盘，不退出程序（需 `__A.tray` 可用） | 26.12.12.1 |
-| `wv_open_external_links_in_browser` | bool   | true             | 用浏览器打开外部链接                                   | 26.11.11.1 |
-| `wv_allow_downloads`                | bool   | true             | 允许下载                                               | 26.11.11.1 |
-| `wv_allow_file_urls`                | bool   | true             | 允许文件链接                                           | 26.11.11.1 |
-| `wv_open_devtools_in_debug`         | bool   | true             | 调试模式下自动打开调试窗口                             | 26.11.11.1 |
-| `wv_remote_debugging_port`          | int    | null             | 远程调试端口                                           | 26.11.11.1 |
-| `wv_drag_region_direct_target_only` | bool   | false            | 拖拽区域匹配模式                                       | 26.11.11.1 |
-| `wv_webview2_runtime_path`          | string | null             | webview2 组件路径                                      | 26.11.11.1 |
-| `port`                              | int    | 0                | 本地服务使用的端口号                                   | 26.11.11.1 |
-| `ssl`                               | bool   | false            | 本地服务使用 ssl                                       | 26.11.11.1 |
-| `user_agent`                        | string | 系统默认         | 指定 UserAgent                                         | 26.11.11.1 |
-| `text_select`                       | bol    | true             | 允许选定页面字符                                       | 26.11.11.1 |
+| 字段                                | 类型   | 默认值           | 说明                       |
+|-------------------------------------|--------|------------------|----------------------------|
+| `id`                                | string |                  | 小应用唯一标识             |
+| `name`                              | string | $id              | 小应用名称                 |
+| `version`                           | string | "0.0.0.1"        | 版本号                     |
+| `description`                       | string | ""               | 小应用描述                 |
+| `author`                            | string | ""               | 作者                       |
+| `url`                               | string | "/"              | 入口地址                   |
+| `html`                              | string | null             | HTML 代码，优先于 `url`    |
+| `win_title`                         | string | "$name $version" | 窗口标题                   |
+| `win_width`                         | number | 800              | 窗口宽度                   |
+| `win_height`                        | number | 600              | 窗口高度                   |
+| `win_hidden`                        | bool   | false            | 启动时隐藏窗口             |
+| `win_confirm_close`                 | bool   | false            | 关闭时弹确认框             |
+| `win_on_top`                        | bool   | false            | 窗口置顶                   |
+| `win_resizable`                     | bool   | true             | 窗口可调整大小             |
+| `win_fullscreen`                    | bool   | false            | 全屏启动                   |
+| `win_close_to_tray`                 | bool   | false            | 关闭窗口时隐藏到托盘，不退出程序（需 `__A.tray` 可用） |
+| `wv_open_external_links_in_browser` | bool   | true             | 用浏览器打开外部链接       |
+| `wv_allow_downloads`                | bool   | true             | 允许下载                   |
+| `wv_allow_file_urls`                | bool   | true             | 允许文件链接               |
+| `wv_open_devtools_in_debug`         | bool   | true             | 调试模式下自动打开调试窗口 |
+| `wv_remote_debugging_port`          | int    | null             | 远程调试端口               |
+| `wv_drag_region_direct_target_only` | bool   | false            | 拖拽区域匹配模式           |
+| `wv_webview2_runtime_path`          | string | null             | webview2 组件路径          |
+| `port`                              | int    | 0                | 本地服务使用的端口号       |
+| `ssl`                               | bool   | false            | 本地服务使用 ssl           |
+| `user_agent`                        | string | 系统默认         | 指定 UserAgent             |
+| `text_select`                       | bol    | true             | 允许选定页面字符           |
 
 ::: danger 注意
 小应用标识请使用工具生成，以免造成重复。以 `ayiyoyoyo` 或者 `_` 开头的为保留用途，请勿使用。
@@ -78,15 +78,15 @@ layout: doc
 
 支持的事件：
 
-| 事件      | 文件名                    | 触发时机                    | 版本       |
-|-----------|---------------------------|-----------------------------|------------|
-| loaded    | `mainwin_on_loaded.js`    | 主窗口加载完成后            | 26.11.11.1 |
-| shown     | `mainwin_on_shown.js`     | 主窗口显示后                | 26.11.11.1 |
-| maximized | `mainwin_on_maximized.js` | 主窗口最大化后              | 26.11.11.1 |
-| minimized | `mainwin_on_minimized.js` | 主窗口最小化后              | 26.11.11.1 |
-| restored  | `mainwin_on_restored.js`  | 主窗口从最大化/最小化恢复后 | 26.11.11.1 |
-| moved     | `mainwin_on_moved.js`     | 主窗口移动后                | 26.11.11.1 |
-| resized   | `mainwin_on_resized.js`   | 主窗口缩放后                | 26.11.11.1 |
+| 事件      | 文件名                    | 触发时机                    |
+|-----------|---------------------------|-----------------------------|
+| loaded    | `mainwin_on_loaded.js`    | 主窗口加载完成后            |
+| shown     | `mainwin_on_shown.js`     | 主窗口显示后                |
+| maximized | `mainwin_on_maximized.js` | 主窗口最大化后              |
+| minimized | `mainwin_on_minimized.js` | 主窗口最小化后              |
+| restored  | `mainwin_on_restored.js`  | 主窗口从最大化/最小化恢复后 |
+| moved     | `mainwin_on_moved.js`     | 主窗口移动后                |
+| resized   | `mainwin_on_resized.js`   | 主窗口缩放后                |
 
 事件脚本可以访问页面的 `window`，因此可以直接操作 DOM、调用扩展。
 
